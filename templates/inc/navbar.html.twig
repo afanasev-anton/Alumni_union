@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-secondary mb-3">
     <div class="container">
-        <a href="/" class="navbar-brand">Events</a>
+        <a href="/" class="navbar-brand">CodeFactory Alumni</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -8,6 +8,18 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a href="/" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/stories" class="nav-link">Stories</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/events" class="nav-link">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/careers" class="nav-link">Careers</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/alumni" class="nav-link">Alumni</a>
                 </li>
                 {% if is_granted('ROLE_USER') %}
                 <li class="nav-item">
