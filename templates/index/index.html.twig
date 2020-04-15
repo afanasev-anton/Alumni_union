@@ -12,7 +12,10 @@
             <div class="card col-md-10">
                 <div class="card-title h2 text-center mt-3">{{ post.title }}</div>
                 <div class="card-body">
-                    <p>Created by {{ post.author }}</p>
+                    <span>Created by {{ post.author }}</span>
+                    {% for tag in post.tags %}
+                    <span class="badge badge-pill badge-warning">{{ tag.name }}</span>
+                    {% endfor %}
                     <p>{{ post.content }}</p>  
                 </div>
             </div>
