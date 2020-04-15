@@ -17,10 +17,9 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
-use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
+class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
 
@@ -80,14 +79,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     public function checkCredentials($credentials, UserInterface $user)
     {
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
-    }
-
-    /**
-     * Used to upgrade (rehash) the user's password automatically over time.
-     */
-    public function getPassword($credentials): ?string
-    {
-        return $credentials['password'];
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
