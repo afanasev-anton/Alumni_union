@@ -6,7 +6,11 @@
 List of Alumni
 
 {% for user in users %}
-	<p>{{user.username}} | <a href="/alumni/profile={{user.id}}">{{user.email}}</a></p>
+	<p>{{user.username}} | <a href="/alumni/profile={{user.id}}">{{user.email}}</a> | 
+		{% for role in user.roles %}
+			{{role}}
+		{% endfor %}
+	</p>
 {% endfor %}
 
 {% endblock %}
