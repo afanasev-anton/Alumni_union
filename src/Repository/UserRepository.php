@@ -35,6 +35,11 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findByRoles($value)
+    {
+        $sql = "SELECT u FROM App:User u WHERE u.roles LIKE '%$value%'";
+        return $this->getEntityManager()->createQuery($sql)->getResult();
+    }
 
     /*
     public function findOneBySomeField($value): ?User
@@ -47,4 +52,5 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+
 }
