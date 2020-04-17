@@ -25,7 +25,9 @@ class IndexController extends AbstractController
      */
     public function alumni()
     {
-    	$users = $this->getDoctrine()->getRepository('App:User')->findAll();
+    	$users = $this->getDoctrine()->getRepository('App:User')
+        ->findByRoles('ROLE_ALUMNI');
+        //findAll();
         //findBy(['roles' => 'ROLE_ALUMNI']);
         // add correct type from entity
 
