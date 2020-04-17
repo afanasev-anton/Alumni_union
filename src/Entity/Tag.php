@@ -24,7 +24,7 @@ class Tag
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Post", mappedBy="tags", cascade={"all"}, orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity="App\Entity\Post", inversedBy="tags")
      */
     private $posts;
 
@@ -32,11 +32,6 @@ class Tag
     public function __construct()
     {
         $this->posts = new ArrayCollection();
-    }
-
-    public function __toString(): string
-    {
-        return $this->name;
     }
 
     public function getId(): ?int
@@ -82,5 +77,10 @@ class Tag
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 }

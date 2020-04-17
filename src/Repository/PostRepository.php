@@ -3,8 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Post;
+use App\Entity\Tag;
+use App\Pagination\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Common\Persistence\ManagerRegistry;
+use function Symfony\Component\String\u;
 
 /**
  * @method Post|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,6 +22,24 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
+    public function findLatest(int $page = 1, Tag $tag = null): Paginator
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->addSelect('a', 't')
+            ->innerJoin('p.author', 'a')
+            ->leftJoin('p.tags', 't')
+            ->where('p.createdAt <= :now')
+            ->orderBy('p.createdAt', 'DESC')
+            ->setParameter('now', new \DateTime())
+        ;
+
+        if (null !== $tag) {
+            $qb->andWhere(':tag MEMBER OF p.tags')
+                ->setParameter('tag', $tag);
+        }
+
+        return (new Paginator($qb))->paginate($page);
+    }
     // /**
     //  * @return Post[] Returns an array of Post objects
     //  */

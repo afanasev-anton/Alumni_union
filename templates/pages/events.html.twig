@@ -3,5 +3,17 @@
 {% block title %}Events{% endblock %}
 
 {% block body %}
-List of Events
+{% if events|length > 0 %}
+        {% for event in events %}
+            <div class="card col-md-10">
+                <div class="card-title h2 text-center mt-3">{{ event.name }}</div>
+                {% for post in event.posts %}
+                    {{post.title}}
+                {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+        {% else %}
+        There are no Events
+    {% endif %}
 {% endblock %}
