@@ -39,10 +39,20 @@ class IndexController extends AbstractController
     public function alumni()
     {
     	$users = $this->getDoctrine()->getRepository('App:User')->findAll();
-    	//findBy(['type'=>'alumni']); 
+        //findBy(['roles' => 'ROLE_ALUMNI']);
         // add correct type from entity
 
         return $this->render('pages/alumnies.html.twig', array('users' => $users));
+    }
+
+    /**
+     * @Route("/alumni/profile={id}", name="profile")
+     */
+    public function profile($id)
+    {
+        $user = $this->getDoctrine()->getRepository('App:User')->find($id); 
+
+        return $this->render('pages/profile.html.twig', array('user' => $user));
     }
 
     /**

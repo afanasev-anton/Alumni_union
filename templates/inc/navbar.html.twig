@@ -21,14 +21,16 @@
                 <li class="nav-item">
                     <a href="/alumni" class="nav-link">Alumni</a>
                 </li>
+                
                 {% if is_granted('ROLE_USER') %}
-                <li class="nav-item">
-                    <a href="/admin" class="nav-link">Admin</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/logout" class="nav-link">Log out</a>
-                </li>
+                    <li class="nav-item">
+                        <a href="/admin" class="nav-link">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link">Log out</a>
+                    </li>
                 {% else %}
+                
                 <li class="nav-item">
                     <a href="/register" class="nav-link">Register</a>
                 </li>
