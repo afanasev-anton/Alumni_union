@@ -1,16 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Alumni directory{% endblock %}
+{% block title %}Alumni Association | Members{% endblock %}
 
 {% block body %}
-List of Alumni
 
-{% for user in users %}
-	<p>{{user.username}} | <a href="/alumni/profile={{user.id}}">{{user.email}}</a> | 
-		{% for role in user.roles %}
-			{{role}}
-		{% endfor %}
-	</p>
-{% endfor %}
+	<h1>List of Alumni</h1>
+
+	{% for user in users %}
+		<p>{{user.username}} | <a href="/alumni/profile={{user.id}}">{{user.email}}</a> | 
+			{% for role in user.roles %}
+				{{role}}
+			{% endfor %}
+		</p>
+	{% endfor %}
 
 {% endblock %}
