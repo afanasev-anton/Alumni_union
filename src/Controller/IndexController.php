@@ -17,7 +17,7 @@ class IndexController extends AbstractController
     {
         $posts = $this->getDoctrine()->getRepository('App:Post')->findAll();
 
-        return $this->render('index/index.html.twig', array('posts' => $posts));
+        return $this->render('index/index.html.twig', array('posts' => $posts, 'school' => 'CodeFactory'));
     }
 
     /**
@@ -25,13 +25,12 @@ class IndexController extends AbstractController
      */
     public function alumni()
     {
-    	$users = $this->getDoctrine()->getRepository('App:User')
-        ->findByRoles('ROLE_ALUMNI');
-        //findAll();
-        //findBy(['roles' => 'ROLE_ALUMNI']);
-        // add correct type from entity
+    	$this->denyAccessUnlessGranted('ROLE_USER');
 
-        return $this->render('pages/alumnies.html.twig', array('users' => $users));
+        $users = $this->getDoctrine()->getRepository('App:User')
+        ->findByRoles('ROLE_ALUMNI');
+
+        return $this->render('pages/alumnies.html.twig', array('users' => $users, 'school' => 'CodeFactory'));
     }
 
     /**
@@ -39,9 +38,17 @@ class IndexController extends AbstractController
      */
     public function profile($id)
     {
-        $user = $this->getDoctrine()->getRepository('App:User')->find($id); 
+        $this->denyAccessUnlessGranted('ROLE_USER');
 
-        return $this->render('pages/profile.html.twig', array('user' => $user));
+        $user = $this->getDoctrine()->getRepository('App:User')->find($id);
+
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $userCurrent = $this->getUser();
+        $currentName = $userCurrent->getUsername();
+
+        return $this->render('pages/profile.html.twig', array('user' => $user, 'school' => 'CodeFactory', 'current' => $currentName));
     }
 
     /**
@@ -53,7 +60,7 @@ class IndexController extends AbstractController
         //findBy(['type'=>'offers']); 
         // add correct type from entity
 
-        return $this->render('pages/careers.html.twig', array('careers' => $careers));
+        return $this->render('pages/careers.html.twig', array('careers' => $careers, 'school' => 'CodeFactory'));
     }
 
     /**
@@ -65,7 +72,7 @@ class IndexController extends AbstractController
         //findBy(['type'=>'events']); 
         // add correct type from entity
 
-        return $this->render('pages/events.html.twig', array('events' => $events));
+        return $this->render('pages/events.html.twig', array('events' => $events, 'school' => 'CodeFactory'));
     }
 
     /**
@@ -77,6 +84,6 @@ class IndexController extends AbstractController
         //findBy(['type'=>'stories']); 
         // add correct type from entity
 
-        return $this->render('pages/stories.html.twig', array('stories' => $stories));
+        return $this->render('pages/stories.html.twig', array('stories' => $stories, 'school' => 'CodeFactory'));
     }
 }

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-secondary mb-3">
     <div class="container">
-        <a href="/" class="navbar-brand">CodeFactory Alumni</a>
+        <a href="/" class="navbar-brand">Alumni Association</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,21 +22,28 @@
                     <a href="/alumni" class="nav-link">Alumni</a>
                 </li>
                 
-                {% if is_granted('ROLE_USER') %}
-                    <li class="nav-item">
-                        <a href="/admin" class="nav-link">Admin</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/logout" class="nav-link">Log out</a>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <!-- Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            <i class='fas fa-user'></i>
+                            {{ app.user.username }}
+                        </a>
+                        <div class="dropdown-menu">
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="/admin" class="dropdown-item">Admin Dashboard</a>
+                            {% endif %}
+                            <a href="/alumni/profile={{app.user.id}}" class="dropdown-item">Profile</a>
+                            <a href="/logout" class="dropdown-item">Log out</a>
+                        </div>
                     </li>
                 {% else %}
-                
-                <li class="nav-item">
-                    <a href="/register" class="nav-link">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/login" class="nav-link">Login</a>
-                </li>
+                    <li class="nav-item">
+                        <a href="/register" class="nav-link">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/login" class="nav-link">Login</a>
+                    </li>
                 {% endif %}
             </ul>
         </div>        
