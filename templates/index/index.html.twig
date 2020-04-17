@@ -7,8 +7,8 @@
 <div class="container">
     <h1 class="mt-3 mb-5">Hello</h1>
 
-    {% if latestPosts|length > 0 %}
-        {% for post in latestPosts %}
+    {% if posts|length > 0 %}
+        {% for post in posts %}
             <div class="card col-md-10">
                 <div class="card-title h2 text-center mt-3">{{ post.title }}</div>
                 <div class="card-body">
