@@ -5,7 +5,15 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Entity\User;
 
+use App\Repository\PostRepository;
+use App\Repository\TagRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
@@ -18,6 +26,16 @@ class IndexController extends AbstractController
         $posts = $this->getDoctrine()->getRepository('App:Post')->findAll();
 
         return $this->render('index/index.html.twig', array('posts' => $posts));
+    }
+
+    /**
+     * @Route("/tag/?tag={tag}", methods="GET", name="showTag")
+     */
+    public function showTag($tag): Response
+    {
+        $posts = $this->getDoctrine()->getRepository('App:Post')->findByTag($tag); 
+
+        return $this->render('pages/showTag.html.twig', array('posts' => $posts));
     }
 
     /**

@@ -13,9 +13,9 @@
                 <div class="card-title h2 text-center mt-3">{{ post.title }}</div>
                 <div class="card-body">
                     <div class="row mb-3">
-                        <span class='mr-3'>Created by {{ post.author }}</span>
-                        {{ include('pages/_post_tags.html.twig') }}
-                        <span class='ml-auto'> {{ post.createdAt | date('j. F Y H:m')}} </span>
+                        <span class='mr-3'>Created by {{ post.username }}</span>
+                        {{ include('pages/_show_tags.html.twig') }}
+                        <span class='ml-auto'> {{ post.created_at | date('j. F Y H:m')}} </span>
                     </div>
                     <p>{{ post.content }}</p>  
                 </div>

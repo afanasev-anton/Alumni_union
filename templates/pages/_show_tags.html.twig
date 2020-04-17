@@ -1,0 +1,12 @@
+
+    <p class="post-tags">
+
+            <a href="{{ path('showTag', {'tag': post.name == app.request.query.get('tag') ? null : post.tag_id}) }}"
+               class="badge badge-{{ post.name == app.request.query.get('tag') ? 'info' : 'default' }}"
+            >
+                <i class="fa fa-tag"></i> {{ post.name }}
+            </a>
+
+    </p>
+
+

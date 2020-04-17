@@ -22,24 +22,30 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
-    public function findLatest(int $page = 1, Tag $tag = null): Paginator
+    public function findByTag($value)
     {
-        $qb = $this->createQueryBuilder('p')
-            ->addSelect('a', 't')
-            ->innerJoin('p.author', 'a')
-            ->leftJoin('p.tags', 't')
-            ->where('p.createdAt <= :now')
-            ->orderBy('p.createdAt', 'DESC')
-            ->setParameter('now', new \DateTime())
-        ;
+        $conn = $this->getEntityManager()
+            ->getConnection();
+            
+        $sql = "SELECT * FROM post t1 JOIN post_tag t2 ON t1.id = t2.post_id JOIN tag t3 ON t2.tag_id = t3.id JOIN `user` t4 ON t1.author_id = t4.id WHERE `tag_id` LIKE '$value'";
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['value' => $value]);
 
-        if (null !== $tag) {
-            $qb->andWhere(':tag MEMBER OF p.tags')
-                ->setParameter('tag', $tag);
-        }
-
-        return (new Paginator($qb))->paginate($page);
+        return $stmt->fetchAll();
     }
+
+
+
+    // public function findByTag($value)
+    // {
+    //     return $this->createQueryBuilder('p')
+    //         ->addSelect('a', 't')
+    //         ->innerJoin('p.post', 'a')
+    //         ->leftJoin('p.tag', 't')
+    //         ->andWhere('t.name = :val')
+    //         ->setParameter('val', $value);
+    // }
     // /**
     //  * @return Post[] Returns an array of Post objects
     //  */

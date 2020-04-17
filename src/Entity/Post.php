@@ -35,7 +35,7 @@ class Post
     private $content;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="posts", orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", cascade={"persist"})
      */
     private $tags;
 
