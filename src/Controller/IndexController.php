@@ -24,8 +24,9 @@ class IndexController extends AbstractController
     public function index()
     {
         $posts = $this->getDoctrine()->getRepository('App:Post')->findBy([], ['createdAt' => 'DESC']);
+        $tag = 'All';
 
-        return $this->render('index/index.html.twig', array('posts' => $posts, 'school' => 'CodeFactory'));
+        return $this->render('index/index.html.twig', array('posts' => $posts, 'school' => 'CodeFactory', 'tag' => $tag));
     }
 
     /**
@@ -84,9 +85,10 @@ class IndexController extends AbstractController
      */
     public function career()
     {
-        $posts = $this->getDoctrine()->getRepository('App:Post')->findByTag('Job Offer'); 
+        $posts = $this->getDoctrine()->getRepository('App:Post')->findByTag('Job Offer');
+        $tag = 'Career'; 
 
-        return $this->render('pages/showTag.html.twig', array('posts' => $posts));
+        return $this->render('pages/showTag.html.twig', array('posts' => $posts, 'tag' => $tag));
     }
 
     /**
@@ -95,8 +97,9 @@ class IndexController extends AbstractController
     public function event()
     {
         $posts = $this->getDoctrine()->getRepository('App:Post')->findByTag('Event'); 
+        $tag = 'Event'; 
 
-        return $this->render('pages/showTag.html.twig', array('posts' => $posts));
+        return $this->render('pages/showTag.html.twig', array('posts' => $posts, 'tag' => $tag));
     }
 
     /**
@@ -105,7 +108,8 @@ class IndexController extends AbstractController
     public function story()
     {
         $posts = $this->getDoctrine()->getRepository('App:Post')->findByTag('Story'); 
+        $tag = 'Story';
 
-        return $this->render('pages/showTag.html.twig', array('posts' => $posts));
+        return $this->render('pages/showTag.html.twig', array('posts' => $posts, 'tag' => $tag));
     }
 }

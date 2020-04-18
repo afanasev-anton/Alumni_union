@@ -2,14 +2,10 @@
 
 {% block title %}Home | Alumni Association of the {{school}}{% endblock %}
 
-{% block body %}
-
-<div class="container">
-    <h1 class="mt-3 mb-5">Hello</h1>
-
+{% block main %}
     {% if posts|length > 0 %}
         {% for post in posts %}
-            <div class="card mb-4 p-3 col-md-8">
+            <div class="mb-4 p-3">
                 <h2>
                     <a href="{{ path('showPost', {slug: post.slug}) }}">
                         {{ post.title }}
@@ -23,8 +19,13 @@
                 </div>
             </div>
         {% endfor %}
+        
         {% else %}
         There are no Posts
     {% endif %}
-</div>
+
+{% endblock %}
+
+{% block sidebar %}
+    {{ include('inc/sidebar.html.twig') }}
 {% endblock %}
