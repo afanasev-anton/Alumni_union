@@ -14,9 +14,10 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <h1 class="h3 mb-3 mt-4 font-weight-normal text-center">Please sign in</h1>
+    <div class="col-md-6 mx-auto border rounded p-3 bg-light">
     <label for="inputUsername">Username</label>
-    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
+    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control mb-3" required autofocus>
     <label for="inputPassword">Password</label>
     <input type="password" name="password" id="inputPassword" class="form-control" required>
 
@@ -35,8 +36,9 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
+    <button class="btn btn-primary mt-3" type="submit">
         Sign in
     </button>
+    </div>
 </form>
 {% endblock %}
