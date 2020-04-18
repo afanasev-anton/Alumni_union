@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}blah{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1 class="mt-3 mb-5">{{ post.title }}</h1>
+    <div class="row m-0 text-muted">
+        <p class="mr-3">Created by <i class="fa fa-user"></i> {{ post.author }}</p>
+        {{ include('pages/_post_tags.html.twig') }}
+        <span class="ml-auto"><i class="fa fa-calendar"></i> {{ post.createdAt | date('j. F Y H:m')}} </span>
+    </div>
+
+    <p>{{ post.content }}</p>  
+</div>
+
+{% endblock %}

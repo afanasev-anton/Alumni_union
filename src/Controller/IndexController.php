@@ -23,7 +23,7 @@ class IndexController extends AbstractController
      */
     public function index()
     {
-        $posts = $this->getDoctrine()->getRepository('App:Post')->findAll();
+        $posts = $this->getDoctrine()->getRepository('App:Post')->findBy([], ['createdAt' => 'DESC']);
 
         return $this->render('index/index.html.twig', array('posts' => $posts, 'school' => 'CodeFactory'));
     }
@@ -37,6 +37,16 @@ class IndexController extends AbstractController
 
         return $this->render('pages/showTag.html.twig', array('posts' => $posts));
     }
+
+    /**
+     * @Route("/post/{slug}", methods="GET", name="showPost")
+     */
+    public function showPost(Post $post): Response
+    {
+        return $this->render('pages/showPost.html.twig', array('post' => $post));
+    }
+
+
 
     /**
      * @Route("/alumni", name="alumni")
@@ -74,11 +84,9 @@ class IndexController extends AbstractController
      */
     public function career()
     {
-        $careers = $this->getDoctrine()->getRepository('App:Post')->findAll();
-        //findBy(['type'=>'offers']); 
-        // add correct type from entity
+        $posts = $this->getDoctrine()->getRepository('App:Post')->findByTag('Job Offer'); 
 
-        return $this->render('pages/careers.html.twig', array('careers' => $careers, 'school' => 'CodeFactory'));
+        return $this->render('pages/showTag.html.twig', array('posts' => $posts));
     }
 
     /**
@@ -86,11 +94,9 @@ class IndexController extends AbstractController
      */
     public function event()
     {
-        $events = $this->getDoctrine()->getRepository('App:Post')->findAll();
-        //findBy(['type'=>'events']); 
-        // add correct type from entity
+        $posts = $this->getDoctrine()->getRepository('App:Post')->findByTag('Event'); 
 
-        return $this->render('pages/events.html.twig', array('events' => $events, 'school' => 'CodeFactory'));
+        return $this->render('pages/showTag.html.twig', array('posts' => $posts));
     }
 
     /**
@@ -98,10 +104,8 @@ class IndexController extends AbstractController
      */
     public function story()
     {
-        $stories = $this->getDoctrine()->getRepository('App:Post')->findAll();
-        //findBy(['type'=>'stories']); 
-        // add correct type from entity
+        $posts = $this->getDoctrine()->getRepository('App:Post')->findByTag('Story'); 
 
-        return $this->render('pages/stories.html.twig', array('stories' => $stories, 'school' => 'CodeFactory'));
+        return $this->render('pages/showTag.html.twig', array('posts' => $posts));
     }
 }

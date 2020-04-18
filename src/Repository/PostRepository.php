@@ -27,7 +27,7 @@ class PostRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()
             ->getConnection();
             
-        $sql = "SELECT * FROM post t1 JOIN post_tag t2 ON t1.id = t2.post_id JOIN tag t3 ON t2.tag_id = t3.id JOIN `user` t4 ON t1.author_id = t4.id WHERE `tag_id` LIKE '$value'";
+        $sql = "SELECT * FROM post t1 JOIN post_tag t2 ON t1.id = t2.post_id JOIN tag t3 ON t2.tag_id = t3.id JOIN `user` t4 ON t1.author_id = t4.id WHERE `name` LIKE '$value'";
         
         $stmt = $conn->prepare($sql);
         $stmt->execute(['value' => $value]);
