@@ -3,4 +3,5 @@ easy_admin:
       # List the entity class name you want to manage
         - App\Entity\Post
         - App\Entity\Tag
+        - App\Entity\Comment
         - App\Entity\User

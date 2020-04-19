@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Entity\User;
-
+use App\Entity\Comment;
+use App\Events\CommentCreatedEvent;
+use App\Form\CommentFormType;
 use App\Repository\PostRepository;
 use App\Repository\TagRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
@@ -36,7 +38,7 @@ class IndexController extends AbstractController
     {
         $posts = $this->getDoctrine()->getRepository('App:Post')->findByTag($tag); 
 
-        return $this->render('pages/showTag.html.twig', array('posts' => $posts));
+        return $this->render('pages/showTag.html.twig', array('posts' => $posts, 'tag' => $tag));
     }
 
     /**
@@ -101,7 +103,7 @@ class IndexController extends AbstractController
 
         return $this->render('pages/showTag.html.twig', array('posts' => $posts, 'tag' => $tag));
     }
-
+    
     /**
      * @Route("/stories", name="story")
      */
@@ -111,5 +113,54 @@ class IndexController extends AbstractController
         $tag = 'Story';
 
         return $this->render('pages/showTag.html.twig', array('posts' => $posts, 'tag' => $tag));
+    }
+
+    /**
+     * @Route("/comment/{postSlug}/new", methods="POST", name="comment_new")
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
+     * @ParamConverter("post", options={"mapping": {"postSlug": "slug"}})
+     *
+     * NOTE: The ParamConverter mapping is required because the route parameter
+     * (postSlug) doesn't match any of the Doctrine entity properties (slug).
+     * See https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/converters.html#doctrine-converter
+     */
+    public function commentNew(Request $request, Post $post, EventDispatcherInterface $eventDispatcher): Response
+    {
+        $comment = new Comment();
+        $comment->setAuthor($this->getUser());
+        $post->addComment($comment);
+
+        $form = $this->createForm(CommentFormType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
+
+            // When an event is dispatched, Symfony notifies it to all the listeners
+            // and subscribers registered to it. Listeners can modify the information
+            // passed in the event and they can even modify the execution flow, so
+            // there's no guarantee that the rest of this controller will be executed.
+            // See https://symfony.com/doc/current/components/event_dispatcher.html
+            $eventDispatcher->dispatch(new CommentCreatedEvent($comment));
+
+            return $this->redirectToRoute('showPost', ['slug' => $post->getSlug()]);
+        }
+
+        return $this->render('inc/comment_form_error.html.twig', [
+            'post' => $post,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    public function commentForm(Post $post): Response
+    {
+        $form = $this->createForm(CommentFormType::class);
+
+        return $this->render('inc/comment_form.html.twig', [
+            'post' => $post,
+            'form' => $form->createView(),
+        ]);
     }
 }
