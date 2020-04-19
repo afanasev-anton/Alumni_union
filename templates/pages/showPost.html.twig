@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}blah{% endblock %}
+{% block title %}{{ post.title }}{% endblock %}
 
 {% block body %}
 
@@ -12,7 +12,7 @@
         <span class="ml-auto"><i class="fa fa-calendar"></i> {{ post.createdAt | date('j. F Y H:m')}} </span>
     </div>
 
-    <p>{{ post.content }}</p>  
+    <p>{{ post.content }}</p>
 </div>
 
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
