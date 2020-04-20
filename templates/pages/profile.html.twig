@@ -4,13 +4,13 @@
 
 {% block body %}
 	
-	<p>Hi</p>
+	<p>Hi, {{current.username}}</p>
 	<p>I am {{user.username}}</p>
 	<p>Email: {{user.email}}</p>
+	<p>Full name: {{user.firstName}} {{user.lastName}}</p>
 
-	<br>
-	<br>
-	<br>
-	<p>User {{current}} looking on this profile</p>
+	{% if (app.user.id == user.id) %}
+		<a href="/alumni/profile={{user.id}}/edit" class="btn btn-primary">Edit</a>
+	{% endif %}
 
 {% endblock %}
