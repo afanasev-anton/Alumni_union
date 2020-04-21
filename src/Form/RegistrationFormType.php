@@ -20,14 +20,6 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('username')
             ->add('email')
-            ->add('roles', ChoiceType::class, [
-                'multiple' => true,
-                'expanded' => true,
-                'choices' => [
-                    'Alumni' => 'ROLE_ALUMNI',
-                    'Company' => 'ROLE_COMPANY'
-                ]
-            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
