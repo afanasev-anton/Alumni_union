@@ -26,7 +26,12 @@
                     <!-- Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            <i class='fas fa-user'></i>
+                            {% if app.user.image is not null %}
+                                <img src="{{ asset('img/profile_pictures/' ~ app.user.image) }}" class='thumbnail'> 
+                            {% else %}
+                                <i class='fas fa-user'></i>
+                            {% endif %}
+                            
                             {{ app.user.username }}
                         </a>
                         <div class="dropdown-menu">
@@ -51,6 +56,12 @@
 </nav>
 
 <style>
+.thumbnail {
+    height: 4vh;
+    width: 4vh;
+    border-radius: 50%;
+    box-shadow: 1px 1px rgba(0.1,0.1,0.1,0.5); 
+}
 .navbar-toggle {
     background-color: white;
     background-image: none;

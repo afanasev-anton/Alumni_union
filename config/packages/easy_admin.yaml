@@ -23,7 +23,7 @@ easy_admin:
            entity: 'User'
            children:
             - { label: "User list", icon: "list", entity: 'User'}
-            - { label: "Avatar", icon: "image", entity: 'Avatar'}
+            
    site_name: 'Alumni Website'
 
    entities:
@@ -77,25 +77,19 @@ easy_admin:
             label: "User"
             form: 
                fields:
+                  - firstname
+                  - lastname
                   - password
                   - email
                   - hasJob
                   - skills
                   - github
-                  - avatar
+                  - {type: 'group', icon: 'clip', label: 'Attachment'}
+                  - {property: 'imageFile', type: 'vich_image'}
+
             list:
                collapse_actions: true
                actions: ['show', 'edit', 'delete']
                batch_action: ['delete']
                title: "All users"
-               fields: ['id', 'username', 'firstname', 'lastname','hasJob']
-         Avatar:
-            class: App\Entity\Avatar
-            label: "Avatar"
-            form:
-               fields:
-                  - user
-                  - {type: 'group', icon: 'clip', label: 'Attachment'}
-                  - {property: 'imageFile', type: 'vich_image'}
-            list:
-               fields: ['id', {property: 'image', type: 'image', base_path: '%profile_path%'}, user]
+               fields: ['id', 'username', 'firstname', 'lastname', {property: 'image', type: 'image', base_path: '%profile_path%'},'hasJob']

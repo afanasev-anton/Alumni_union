@@ -8,14 +8,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
  * @Vich\Uploadable()
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -80,17 +81,35 @@ class User implements UserInterface
      */
     private $comments;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Avatar", inversedBy="user")
+    /** 
+     *  @ORM\Column(type="datetime", nullable=true)
      */
-    private $avatar;
 
+    protected $updateDate;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+
+    private $image;
+
+    /**
+     * @Vich\UploadableField(mapping="profile_picture", fileNameProperty="image")
+     * @Assert\Valid
+     * @Assert\File(
+     *     maxSize="3000K",
+     *     mimeTypes={
+     *         "image/jpg", "image/gif", "image/jpeg", "image/png"
+     *     }
+     * )
+     * @var File
+     */
+    private $imageFile;
 
     public function __construct()
     {
         $this->posts = new ArrayCollection();
         $this->comments = new ArrayCollection();
-        $this->avatar = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -305,15 +324,50 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAvatar(): ?Avatar
+    public function setUpdateDate(\DateTimeInterface $updateDate): void
     {
-        return $this->avatar;
+        $this->updateDate = $updateDate;
     }
 
-    public function setAvatar(?Avatar $avatar): self
+    public function setImageFile(File $image = null): void
     {
-        $this->avatar = $avatar;
+        $this->imageFile = $image;
 
-        return $this;
+        if($image) {
+            $this->setUpdateDate(new \DateTimeImmutable());
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImage(?string $image): void
+    {
+        $this->image = $image;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->username,
+            $this->password
+        ]);
+    }
+
+    public function unserialize($serialized): void
+    {
+        [
+            $this->id,
+            $this->username,
+            $this->password
+        ] = \unserialize($serialized, [self::class]);
     }
 }
