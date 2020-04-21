@@ -1,7 +1,81 @@
 easy_admin:
+   design:
+      menu:
+         - label: "Entities"
+         - label: "Posts"
+           icon: "comment"
+           children:
+            - { label: "Posts list", icon: "list", entity: 'Post'}
+            - { label: "Add post", icon: "plus", entity: 'Post', params: {action: 'new'}}
+
+         - label: "Tags"
+           icon: "tag"
+           children:
+            - { label: "Tag list", icon: "list", entity: 'Tag'}
+            - { label: "Add tag", icon: "plus", entity: 'Tag', params: {action: 'new'}}
+
+         - label: "Comments"
+           icon: "comments"
+           entity: 'Comment'
+
+         - label: "Users"
+           icon: "user"
+           entity: 'User'
+
    entities:
       # List the entity class name you want to manage
-        - App\Entity\Post
-        - App\Entity\Tag
-        - App\Entity\Comment
-        - App\Entity\User
+         Post:
+            class: App\Entity\Post
+            label: "Post"
+            form:
+               fields:
+                  - title
+                  - content
+                  - createdAt
+                  - slug
+                  - author
+                  - tags
+                  - {type: 'group', icon: 'clip', label: 'Attachment'}
+                  - {property: 'pictureFile', type: 'vich_image'}
+            
+            list:
+               collapse_actions: true
+               actions: ['show', 'edit', 'delete']
+               batch_action: ['delete']
+               title: "All posts"
+               fields: ['title', 'content', 'createdAt', {property: 'picture', type: 'image', base_path: '%uploads_path%'}, 'author']
+            show:
+               fields:
+                     - title
+                     - content
+                     - createdAt
+                     - slug
+                     - author
+                     - tags
+                     - {property: 'picture', type: 'image', base_path: '%uploads_path%'}
+            edit:
+               fields:
+                  - '-tags'
+                  - '-createdAt'
+
+         Tag:
+            class: App\Entity\Tag
+            label: "Tag"
+            form:
+               fields:
+                  - name
+
+         Comment:
+            class: App\Entity\Comment
+
+         User:
+            class: App\Entity\User
+            label: "User"
+            form: 
+               fields:
+                  - password
+                  - email
+                  - hasJob
+                  - skills
+                  - github
+         

@@ -11,7 +11,9 @@
         {{ include('pages/_post_tags.html.twig') }}
         <span class="ml-auto"><i class="fa fa-calendar"></i> {{ post.createdAt | date('j. F Y H:m')}} </span>
     </div>
-
+    {% if (post.picture) %}
+        <img src="{{ asset('img/post_pictures/' ~ post.picture) }}" class='img-thumbnail'>
+    {% endif %}
     <p>{{ post.content }}</p>
 </div>
 
@@ -50,6 +52,10 @@
     </div>
 
 <style>
+.img-thumbnail {
+    max-height: 50vh;
+}
+
 .commentcolor div:nth-child(even) {
     background: #e0e0e0;
 }

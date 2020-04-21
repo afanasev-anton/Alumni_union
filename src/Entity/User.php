@@ -7,10 +7,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
+ * @Vich\Uploadable()
  */
 class User implements UserInterface
 {
@@ -58,11 +61,6 @@ class User implements UserInterface
     private $hasJob;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $profilePic;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $skills;
@@ -82,10 +80,12 @@ class User implements UserInterface
      */
     private $comments;
 
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->avatar = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -210,18 +210,6 @@ class User implements UserInterface
     public function setHasJob(bool $hasJob): self
     {
         $this->hasJob = $hasJob;
-
-        return $this;
-    }
-
-    public function getProfilePic(): ?string
-    {
-        return $this->profilePic;
-    }
-
-    public function setProfilePic(string $profilePic): self
-    {
-        $this->profilePic = $profilePic;
 
         return $this;
     }

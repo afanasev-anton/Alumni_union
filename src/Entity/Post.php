@@ -7,10 +7,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
+ * @Vich\Uploadable()
  */
 class Post
 {
@@ -62,13 +65,28 @@ class Post
     private $comments;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+    * @ORM\Column(type="string", length=255)
+    */
+
+    private $picture;
+
+    /**
+     * @Vich\UploadableField(mapping="post_picture", fileNameProperty="picture")
+     * 
      */
-    private $img;
+
+    private $pictureFile;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * 
+     */
+    private $updatedAt;
 
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
         $this->tags = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
@@ -152,6 +170,51 @@ class Post
         return $this;
     }
 
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+
+
+    public function getPictureFile(): ?File
+    {
+        return $this->pictureFile;
+    }
+
+
+    /**
+     * @param mixed $pictureFile
+     * @throws \Exception
+     */
+    public function setPictureFile($pictureFile): void
+    {
+        $this->pictureFile = $pictureFile;
+
+        if ($pictureFile) {
+            $this->updatedAt = new \DateTime();
+        }
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
     public function __toString()
     {
         return $this->title;
@@ -196,18 +259,6 @@ class Post
                 $comment->setPost(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getImg(): ?string
-    {
-        return $this->img;
-    }
-
-    public function setImg(?string $img): self
-    {
-        $this->img = $img;
 
         return $this;
     }
