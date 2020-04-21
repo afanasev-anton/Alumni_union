@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class EditProfileType extends AbstractType
 {
@@ -26,7 +27,12 @@ class EditProfileType extends AbstractType
             ->add('hasJob')
             ->add('skills')
             ->add('github')
-            //->add('image')
+            ->add('imageFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'download_uri' => true,
+                'image_uri' => true
+            ])
             ->add('save', SubmitType::class, [
                 'label'=> 'Update Profile',
                 'attr' => [

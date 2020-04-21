@@ -10,6 +10,7 @@ easy_admin:
 
          - label: "Tags"
            icon: "tag"
+           permission: 'ROLE_ADMIN'
            children:
             - { label: "Tag list", icon: "list", entity: 'Tag'}
             - { label: "Add tag", icon: "plus", entity: 'Tag', params: {action: 'new'}}
@@ -17,10 +18,12 @@ easy_admin:
          - label: "Comments"
            icon: "comments"
            entity: 'Comment'
+           permission: 'ROLE_ADMIN'
 
          - label: "Users"
            icon: "user"
            entity: 'User'
+           permission: 'ROLE_ADMIN'
            children:
             - { label: "User list", icon: "list", entity: 'User'}
             
@@ -45,6 +48,7 @@ easy_admin:
             list:
                collapse_actions: true
                actions: ['show', 'edit', 'delete']
+               permission: 'ROLE_ADMIN'
                batch_action: ['delete']
                title: "All posts"
                fields: ['title', 'content', 'createdAt', {property: 'picture', type: 'image', base_path: '%uploads_path%'}, 'author']
@@ -81,6 +85,7 @@ easy_admin:
                   - lastname
                   - password
                   - email
+                  - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'User': 'ROLE_USER', 'Alumni': 'ROLE_ALUMNI', 'Company': 'ROLE_COMPANY', 'Admin': 'ROLE_ADMIN' } } } 
                   - hasJob
                   - skills
                   - github
@@ -88,6 +93,8 @@ easy_admin:
                   - {property: 'imageFile', type: 'vich_image'}
 
             list:
+               filters:
+                  - { property: roles, type: array }
                collapse_actions: true
                actions: ['show', 'edit', 'delete']
                batch_action: ['delete']
