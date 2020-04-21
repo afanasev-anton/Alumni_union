@@ -2,21 +2,38 @@
 
 {% block title %}Home | Alumni Association of the {{school}}{% endblock %}
 
-{% block main %}
-    <div class="card bg-light mb-3">
-        <h5 class="card-title text-center">Welcome to the PASF Alumni Association webpage!</h5>
-        <br>
-        <p class="card-text text-center">Here you can find news about the exciting events that we organize, interesting successfull stories of our students and even job opportunities! <br>Log in to discover what we can do for you or just visit our pages to stay updated.</p>
+{% block body %}
+    <div class="row p-3">
+        <div class="w-100 card bg-light">
+            <h5 class="card-title text-center">Welcome to the PASF Alumni Association webpage!</h5>
+            <br>
+            <p class="card-text text-center">Here you can find news about the exciting events that we organize, interesting successfull stories of our students and even job opportunities! <br>Log in to discover what we can do for you or just visit our pages to stay updated.</p>
+        </div>
     </div>
-
-    <div class="container appear">
-        <div class="card-columns text-center">
-            
+    
+    <div class="row p-3 appear">
+        <div class="col-4 p-2">
+            {# PLACE FOR STORIES #}
             <div class="card event">
-                <img class="card-img-top" src="{{asset('img/event3bis.jpg')}}" alt="Card image">
+                <img class="card-img-top" src="{{asset('img/event1.jpg')}}" alt="Card image">
             </div>
-
-            <div class="card text-white text-center p-3 alumni" style="background-color:#3CB521;" >
+            {% if posts|length > 3 %}
+                {% for post in posts|slice(0, 2) %}
+                    <div class='card story' style='background-image:url(/img/avatar3.png)'>
+                        
+                        <div class='show'>
+                            <div class='stripe_title'>{{ post.title }}</div>
+                            <div class='stripe_subtitle'>
+                                <a href='' style='color:white'>Want to know how?</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="col-4 p-2">
+            {# MOTTO Part #}
+            <div class="card text-white text-center alumni p-2 mb-2" style="background-color:#3CB521;" >
                 <blockquote class="blockquote mb-0">
                     <p>Everybody can code!</p>
                     <footer class="blockquote-footer">
@@ -24,37 +41,58 @@
                     </footer>
                 </blockquote>
             </div>
-
-
-    {% if posts|length > 0 %}
-        {% for post in posts %}
-            <div class="mb-4 p-3">
-                <h2>
-                    <a href="{{ path('showPost', {slug: post.slug}) }}">
-                        {{ post.title }}
-                    </a>
-                </h2>
-                <p>{{ post.content[:80] ~ '...' }}</p>  
-                <div class="row m-0 text-muted">
-                    <p class="mr-3">Created by {% if post.author.image is not null %}
-            <img src="{{ asset('img/profile_pictures/' ~ post.author.image) }}" class='thumbnail'> 
-        {% else %}
-            <i class='fas fa-user'></i>
-        {% endif %} {{ post.author }}</p>
-                    {{ include('pages/_post_tags.html.twig') }}
-                    <span class="ml-auto"><i class="fa fa-calendar"></i> {{ post.createdAt | date('j. F Y H:m')}} </span>
+            {# LOGO Part #}
+            <div class="card mb-2">
+                <img class="card-img-top" src="{{asset('img/AlumniLogoTras.png')}}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Discover more about our Association!</h5>
+                    <p class="card-text">Do you know what PASF stands for?</p>
                 </div>
             </div>
-        {% endfor %}
-        
-        {% else %}
-        There are no Posts
-    {% endif %}
-    
+            {# Headline Part #}
+            <div class="card text-white text-center alumni p-2" style="background-color: #3CB521;" >
+                <blockquote class="blockquote mb-0">
+                    <p>Shoot for the moon. Even if you miss, you'll land among the stars.</p>
+                    <footer class="blockquote-footer">
+                        <small>  One of our students  </small>
+                    </footer>
+                </blockquote>
+            </div>
+        </div>        
+        <div class="col-4 p-2">
+            {# PLACE FOR EVENTS #}
+            <div class="card event">
+                <img class="card-img-top" src="{{asset('img/event2.jpg')}}" alt="Card image">
+            </div>
         </div>
     </div>
+    
+
+            {% if posts|length > 0 %}
+                {% for post in posts %}
+                    <div class="mb-4 p-3">
+                        <h2>
+                            <a href="{{ path('showPost', {slug: post.slug}) }}">
+                                {{ post.title }}
+                            </a>
+                        </h2>
+                        <p>{{ post.content[:80] ~ '...' }}</p>  
+                        <div class="row m-0 text-muted">
+                            <p class="mr-3">Created by <i class="fa fa-user"></i> {{ post.author }}</p>
+                            {{ include('pages/_post_tags.html.twig') }}
+                            <span class="ml-auto"><i class="fa fa-calendar"></i> {{ post.createdAt | date('j. F Y H:m')}} </span>
+                        </div>
+                    </div>
+                {% endfor %}
+                
+            {% else %}
+                <h4>There are no Posts</h4>
+            {% endif %}
+
 {% endblock %}
 
+{#
 {% block sidebar %}
     {{ include('inc/sidebar.html.twig') }}
 {% endblock %}
+#}
