@@ -51,7 +51,7 @@ font-weight: bold;
   100%  {left:0px; top:0px;}
 }
 
-/*just to make a card-columns not so crampy and being secure that avarything is diplayed near
+/*just to make a card-columns not so crampy and being secure that everything is displayed near
  and not only one under others post */
 
 .card-columns {
@@ -231,8 +231,8 @@ and the story animation*/
   position: relative; 
   overflow: hidden;
   margin: 0;
-  height: 100%;
-  width: 100%;
+  /*height: 100%;
+  width: 100%;*/
   filter: grayscale(100%);
 }
 .alumni img{

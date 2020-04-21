@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Entity\Comment;
 use App\Events\CommentCreatedEvent;
 use App\Form\CommentFormType;
+use App\Form\EditProfileType;
 use App\Repository\PostRepository;
 use App\Repository\TagRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
@@ -17,13 +18,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-// for the inputs
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 
 class IndexController extends AbstractController
 {
@@ -95,29 +90,17 @@ class IndexController extends AbstractController
 
         $user = $this->getDoctrine()->getRepository('App:User')->find($id);
 
-        // returns your User object, or null if the user is not authenticated
-        // use inline documentation to tell your editor your exact User class
+        // returns current User object, or null if the user is not authenticated
         /** @var \App\Entity\User $user */
         $userCurrent = $this->getUser();
         $idCurrent = $userCurrent->getId();
         //  id username roles password email first_name last_name has_job profile_pic skills github
         
         //Edit form
-        $form = $this->createFormBuilder($userCurrent)
-        ->add('firstName', TextType::class, array('label'=> 'First Name', 'attr' => array('class'=> 'form-control')))
-        ->add('lastName', TextType::class, array('label'=> 'Last Name', 'attr' => array('class'=> 'form-control')))
-        ->add('save', SubmitType::class, array('label'=> 'Update Profile', 'attr' => array('class'=> 'btn btn-primary w-25 mt-2')))
-        ->getForm();
+        $form = $this->createForm(EditProfileType::class, $userCurrent);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
-            //fetching data
-            $FirstName = $form['firstName']->getData();
-            $LastName = $form['lastName']->getData();
-
-            //set attributes for User object
-            $userCurrent->setFirstName($FirstName);
-            $userCurrent->setLastName($LastName);
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($userCurrent);
