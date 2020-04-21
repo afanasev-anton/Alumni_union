@@ -81,6 +81,7 @@ easy_admin:
                   - lastname
                   - password
                   - email
+                  - {property: 'roles', type: 'choice'} 
                   - hasJob
                   - skills
                   - github
@@ -88,6 +89,8 @@ easy_admin:
                   - {property: 'imageFile', type: 'vich_image'}
 
             list:
+               filters:
+                  - { property: roles, type: array }
                collapse_actions: true
                actions: ['show', 'edit', 'delete']
                batch_action: ['delete']

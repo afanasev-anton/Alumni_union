@@ -14,7 +14,7 @@
                 <p>{{ post.content[:50] ~ '...' }}</p>  
                 <div class="row m-0 text-muted">
                     <p class="mr-3">Created by <i class="fa fa-user"></i> {{ post.username }}</p>
-                    {{ include('pages/_show_tags.html.twig') }}
+                        {{ include('pages/_show_tags.html.twig') }}
                     <span class="ml-auto"><i class="fa fa-calendar"></i> {{ post.created_at | date('j. F Y H:m')}} </span>
                 </div>
             </div>
