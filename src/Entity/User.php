@@ -80,6 +80,11 @@ class User implements UserInterface
      */
     private $comments;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Avatar", inversedBy="user")
+     */
+    private $avatar;
+
 
     public function __construct()
     {
@@ -296,6 +301,18 @@ class User implements UserInterface
                 $comment->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAvatar(): ?Avatar
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?Avatar $avatar): self
+    {
+        $this->avatar = $avatar;
 
         return $this;
     }
