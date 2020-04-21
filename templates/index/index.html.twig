@@ -4,34 +4,31 @@
 
 {% block body %}
     <div class="row p-3">
-        <div class="w-100 card bg-light">
+        <div class="w-100 card bg-light p-2">
             <h5 class="card-title text-center">Welcome to the PASF Alumni Association webpage!</h5>
             <br>
             <p class="card-text text-center">Here you can find news about the exciting events that we organize, interesting successfull stories of our students and even job opportunities! <br>Log in to discover what we can do for you or just visit our pages to stay updated.</p>
         </div>
     </div>
     
-    <div class="row p-3 appear">
-        <div class="col-4 p-2">
-            {# PLACE FOR STORIES #}
-            <div class="card event">
-                <img class="card-img-top" src="{{asset('img/event1.jpg')}}" alt="Card image">
-            </div>
-            {% if posts|length > 3 %}
+    <div class="row p-3 {#appear#}">
+        {# PLACE FOR STORIES #}
+        <div class="col-12 col-sm-6 col-md-4 p-2">            
+            {% if posts|length > 1 %}
                 {% for post in posts|slice(0, 2) %}
-                    <div class='card story' style='background-image:url(/img/avatar3.png)'>
-                        
-                        <div class='show'>
-                            <div class='stripe_title'>{{ post.title }}</div>
-                            <div class='stripe_subtitle'>
-                                <a href='' style='color:white'>Want to know how?</a>
-                            </div>
-                        </div>
-                    </div>
+                    {# START of Cards #}
+                    {{ include('inc/card_post.html.twig') }}
+                    {# END #}
                 {% endfor %}
+            {% else %}
+                {# If there is not enought posts there would be the banner #}
+                <div class="card event">
+                    <img class="card-img-top" src="{{asset('img/event1.jpg')}}" alt="Card image">
+                </div>
             {% endif %}
         </div>
-        <div class="col-4 p-2">
+        {# CENTRAL COLUMN WITH STATIC CONTENT #}
+        <div class="col-md-4 p-2 d-none d-md-block">
             {# MOTTO Part #}
             <div class="card text-white text-center alumni p-2 mb-2" style="background-color:#3CB521;" >
                 <blockquote class="blockquote mb-0">
@@ -59,17 +56,28 @@
                 </blockquote>
             </div>
         </div>        
-        <div class="col-4 p-2">
-            {# PLACE FOR EVENTS #}
-            <div class="card event">
-                <img class="card-img-top" src="{{asset('img/event2.jpg')}}" alt="Card image">
-            </div>
+        {# PLACE FOR EVENTS #}
+        <div class="col-12 col-sm-6 col-md-4 p-2">
+            {% if posts|length > 3 %}
+                {% for post in posts|slice(2, 2) %}
+                    {# START #}
+                    {{ include('inc/card_post.html.twig') }}
+                    {# END #}
+                {% endfor %}
+            {% else %}
+                {# If there is not enought posts there would be the banner #}
+                <div class="card event">
+                    <img class="card-img-top" src="{{asset('img/event2.jpg')}}" alt="Card image">
+                </div>
+            {% endif %}
+
         </div>
     </div>
-    
 
-            {% if posts|length > 0 %}
-                {% for post in posts %}
+    {#
+
+    {% if posts|length > 0 %}
+                {% for post in posts|slice(0, 4)%}
                     <div class="mb-4 p-3">
                         <h2>
                             <a href="{{ path('showPost', {slug: post.slug}) }}">
@@ -88,6 +96,7 @@
             {% else %}
                 <h4>There are no Posts</h4>
             {% endif %}
+    #}
 
 {% endblock %}
 
