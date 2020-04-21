@@ -3,6 +3,29 @@
 {% block title %}Home | Alumni Association of the {{school}}{% endblock %}
 
 {% block main %}
+    <div class="card bg-light mb-3">
+        <h5 class="card-title text-center">Welcome to the PASF Alumni Association webpage!</h5>
+        <br>
+        <p class="card-text text-center">Here you can find news about the exciting events that we organize, interesting successfull stories of our students and even job opportunities! <br>Log in to discover what we can do for you or just visit our pages to stay updated.</p>
+    </div>
+
+    <div class="container appear">
+        <div class="card-columns text-center">
+            
+            <div class="card event">
+                <img class="card-img-top" src="{{asset('img/event3bis.jpg')}}" alt="Card image">
+            </div>
+
+            <div class="card text-white text-center p-3 alumni" style="background-color:#3CB521;" >
+                <blockquote class="blockquote mb-0">
+                    <p>Everybody can code!</p>
+                    <footer class="blockquote-footer">
+                        <small>  motto of the school  </small>
+                    </footer>
+                </blockquote>
+            </div>
+
+
     {% if posts|length > 0 %}
         {% for post in posts %}
             <div class="mb-4 p-3">
@@ -23,7 +46,9 @@
         {% else %}
         There are no Posts
     {% endif %}
-
+    
+        </div>
+    </div>
 {% endblock %}
 
 {% block sidebar %}
