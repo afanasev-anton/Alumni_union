@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Profile | {{user.firstName}}{{user.lastName}}{% endblock %}
+
+{% block body %}
+	
+	{% if (app.user.id == user.id) %}
+		{{ form_start(form) }}
+			<p>Hi, {{current.username}} you can Update your information</p>
+			<p>I am {{user.username}}</p>
+			<p>Email: {{user.email}}</p>
+			<p>Full name: 
+				<span class="w-25">{{ form_widget(form.firstName) }}</span>
+				<span  class="w-25">{{ form_widget(form.lastName) }}</span>
+			</p>
+
+		{{ form_end(form) }}
+	{% endif %}
+
+{% endblock %}
