@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-secondary mb-3">
+<nav class="navbar navbar-expand-sm bg-light navbar-light mb-3">
     <div class="container">
         <a href="/" class="navbar-brand">Alumni Association</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
@@ -7,19 +7,19 @@
         <div class="collapse navbar-collapse" id="mobile-nav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="/" class="nav-link">Home</a>
+                    <a href="/" class="nav-link link homelink">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/stories" class="nav-link">Stories</a>
+                    <a href="/stories" class="nav-link link storylink">Stories</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/events" class="nav-link">Events</a>
+                    <a href="/events" class="nav-link link eventlink">Events</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/careers" class="nav-link">Careers</a>
+                    <a href="/careers" class="nav-link link careerlink">Careers</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/alumni" class="nav-link">Alumni</a>
+                    <a href="/alumni" class="nav-link link alumnilink">Alumni</a>
                 </li>
                 
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -39,10 +39,10 @@
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a href="/register" class="nav-link">Register</a>
+                        <a href="/register" class="nav-link link alumnilink">Register</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/login" class="nav-link">Login</a>
+                        <a href="/login" class="nav-link link alumnilink">Login</a>
                     </li>
                 {% endif %}
             </ul>
