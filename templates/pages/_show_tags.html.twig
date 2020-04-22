@@ -1,8 +1,12 @@
-<a href="{{ path('showTag', {'tag': post.name == app.request.query.get('tag') ? null : post.name}) }}"
-    class="badge badge-{{ post.name == app.request.query.get('tag') ? 'success' : 'primary' }}"
->
-    <i class="fa fa-tag"></i> {{ post.name }}
-</a>
 
+    <p class="post-tags">
+
+            <a href="{{ path('showTag', {'tag': post.name == app.request.query.get('tag') ? null : post.name}) }}"
+               class="badge badge-{{ post.name == app.request.query.get('tag') ? 'success' : 'primary' }}"
+            >
+                <i class="fa fa-tag"></i> {{ post.name }}
+            </a>
+
+    </p>
 
 
