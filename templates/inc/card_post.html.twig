@@ -23,10 +23,10 @@
                 {% if (post.picture) %}
                     <img class="card-img-top" src="{{ asset('img/post_pictures/' ~ post.picture) }}" alt="Card image">
                 {% endif %}
-                <div class='card-img-overlay text-center p-4'>
+                <div class='card-img-overlay text-center p-4 d-flex flex-column'>
                     <h4 class='card-title' style='background-color:#F8C471'><b>{{ post.title }}</b></h4>
                     <p class='card-text' style='background-color:#F8C471'>{{ post.content[:30] ~ '...' }}</p>
-                    <a href='{{ path('showPost', {slug: post.slug}) }}' class='btn btn-warning stretched-link'>
+                    <a href='{{ path('showPost', {slug: post.slug}) }}' class='btn btn-warning stretched-link align-self-end'>
                         <span>See more</span>
                     </a>
                 </div>
@@ -35,6 +35,9 @@
 
             {# CAREER CARD #}
             <div class='card career hvr-buzz-out mb-2'>
+                {% if (post.picture) %}
+                    <img class="card-img-top" src="{{ asset('img/post_pictures/' ~ post.picture) }}" alt="Card image">
+                {% endif %}
                 <div class='card-body text-center'>
                     <h4 class='card-title'><b>{{ post.title }}</b></h4>
                     <p class='card-text'>{{ post.content[:30] ~ '...' }}</p>
