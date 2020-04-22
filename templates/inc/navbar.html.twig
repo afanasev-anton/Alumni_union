@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm bg-light navbar-light mb-3">
     <div class="container">
-        <a href="/" class="navbar-brand">Alumni Association</a>
+        <a href="/" class="navbar-brand alumnilink link">Alumni Association</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -24,8 +24,8 @@
                 
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <!-- Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    <li class="nav-item dropdown link">
+                        <a class="nav-link dropdown-toggle link alumnilink" href="#" id="navbardrop" data-toggle="dropdown">
                             {% if app.user.image is not null %}
                                 <img src="{{ asset('img/profile_pictures/' ~ app.user.image) }}" class='thumbnail'> 
                             {% else %}
@@ -36,7 +36,7 @@
                         </a>
                         <div class="dropdown-menu">
                             {% if is_granted('ROLE_COMPANY') %}
-                                <a href="/admin" class="dropdown-item">Dashboard</a>
+                                <a href="/admin" class="dropdown-item link alumnilink">Dashboard</a>
                             {% endif %}
                             <a href="/alumni/profile={{app.user.id}}" class="dropdown-item">Profile</a>
                             <a href="/logout" class="dropdown-item">Log out</a>
