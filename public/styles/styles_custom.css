@@ -402,9 +402,10 @@ and the story animation*/
 }
 
 .alumni:hover h3{
-color: #359E1D;
+color: green;
 font-weight: bold;
 }
+
 .alumni:hover::before {
     animation: circle .75s;
 }
