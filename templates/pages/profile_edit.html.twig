@@ -6,13 +6,47 @@
 	
 	{% if (app.user.id == user.id) %}
 		{{ form_start(form) }}
-			<p>Hi, {{current.username}} you can Update your information</p>
-			<p>I am {{user.username}}</p>
-			<p>Email: {{user.email}}</p>
-			<p>Full name: 
-				<span class="w-25">{{ form_widget(form.firstName) }}</span>
-				<span  class="w-25">{{ form_widget(form.lastName) }}</span>
-			</p>
+			<div class="card bg-light p-2 text-center mb-4">
+		      <h1>{{ form_widget(form.firstName) }} {{ form_widget(form.lastName) }}</h1>
+		    </div>
+		    
+		    <div class="card bg-light p-2 mb-4">
+		      
+		      <div class="row no-gutters mb-4">
+		        <div class="col-2 p-2">
+		          <p class="text-uppercase"><b>Personal information:</b></p>
+		        </div>
+		        <div class="col-8 p-2">
+		          <p> E-mail:<span class="font-italic">{{ form_widget(form.email)}} </span> </p>
+		          <p> Telephone:<span class="font-italic">{{ form_widget(form.tel)}}</span></p>
+		          <br>
+		          <p> Date of birth:<span class="font-italic">{{ form_widget(form.birth)}}</span> </p>
+		          <p> Nationality:<span class="font-italic">{{ form_widget(form.nation)}}</span></p>
+		        </div>
+		        <div class="col-2 p-2">
+		          <img src="{{ asset('img/profile_pictures/' ~ user.image) }}" class="img-fluid">
+		        </div>
+		      </div>
+		      
+		      <div class="row no-gutters">
+		        <div class="col-2 p-2">
+		          <p class="text-uppercase"><b>Course:</b></p>
+		        </div>
+		        <div class="col-8 p-2">
+		          <p> Course/es:<span class="font-italic">{{ form_widget(form.course)}}</span></p>
+		          <p> Other skills:<span class="font-italic">{{ form_widget(form.skills)}}</span> </p>
+		          <p> Github repository:<span class="font-italic"><a href="{{user.github}}">{{ form_widget(form.github)}}</a></span></p>
+		        </div>
+		        <div class="col-2 p-2" >
+		          {{ form_widget(form.save)}}
+		        </div>
+		      </div>
+
+		    </div>
+		    
+		    <div class="card bg-light text-center mb-4">
+		    	<p class="text-center"><span class="font-italic">{{ form_widget(form.descr)}}</span></p>
+		    </div>
 
 		{{ form_end(form) }}
 	{% endif %}

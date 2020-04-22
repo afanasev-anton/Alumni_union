@@ -3,53 +3,6 @@
 {% block title %}Alumni | {{user.firstName}}{{user.lastName}}{% endblock %}
 
 {% block body %}
-	
-	  <div class="container">
-        <div class="card bg-light text-center">
-          <h1><span>{{user.firstName}} {{user.lastName}}</span></h1>
-        </div>
-      <br>
-      <div class="card bg-light " style="padding:10px;">
-        <div class="row">
-         	<div class="col-2">
-         	<p  style="text-transform:uppercase;"> <b> Personal information: </b> </p>
-         	</div>
-          	<div class="col-7">
-				<p> E-mail:<span style="font-style: italic"> {{user.email}} </span> </p>
-				<p> Telephone:<span style="font-style: italic"> {{user.tel}}</span></p>
-				<br>
-				<p> Date of birth:<span style="font-style: italic">{{ user.birth| date('j. F Y ') }}</span> </p>
-				<p> Nationality:<span style="font-style: italic">{{user.nation}}</span></p>
-           	</div>
-          	<div class="col-2">
-          		<img src="/img/profile_pictures/{{user.image}}" style="width:200px; height:200px; padding:5px;">
-          	</div>
-         </div>
-          <div class="row">
-          <hr>
-          </div>
-         <div class="row">
-         	<div class="col-2">
-         	<p  style="text-transform: uppercase;"> <b> Course: </b> </p>
-         	</div>
-          	<div class="col-8">
-				<p> Course/es:<span style="font-style: italic"> {{user.course}}</span></p>
-				<p> Other skills:<span style="font-style: italic"> {{user.skills}}</span> </p>
-				<p> Github repository:<span style="font-style: italic"><a href="{{user.github}}"> {{user.github}}</a></span></p>
-           	</div>
-           	    <div class="col-2 text-center" >
-           	    		{% if (app.user.id == user.id) %}
-		<a href="/alumni/profile={{user.id}}/edit" class="btn btn-dark">Edit</a>
-	{% endif %}
-          	</div>
-        </div> 		
-    </div>
-        <br>
-    <div class="card bg-light text-center">
-    <p class="text-center"><span style="font-style: italic">{{user.descr}}</p>
-    </div>
-      <br>
-
- </div>  
+  
 
 {% endblock %}
