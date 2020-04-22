@@ -1,6 +1,7 @@
 easy_admin:
    design:
       menu:
+         - {label: 'Back to Homepage', url: '/', rel: 'index', icon: 'backward'}
          - label: "Entities"
          - label: "Posts"
            icon: "comment"
@@ -24,8 +25,6 @@ easy_admin:
            icon: "user"
            entity: 'User'
            permission: 'ROLE_ADMIN'
-           children:
-            - { label: "User list", icon: "list", entity: 'User'}
             
    site_name: 'Alumni Website'
 

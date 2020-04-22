@@ -127,9 +127,9 @@ class User implements UserInterface, \Serializable
     private $nation;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $address;
+    private $descr;
 
     public function __construct()
     {
@@ -444,14 +444,14 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getAddress(): ?string
+    public function getDescr(): ?string
     {
-        return $this->address;
+        return $this->descr;
     }
 
-    public function setAddress(?string $address): self
+    public function setDescr(?string $descr): self
     {
-        $this->address = $address;
+        $this->descr = $descr;
 
         return $this;
     }
