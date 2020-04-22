@@ -7,7 +7,12 @@
 <div class="container">
     <h1 class="mt-3 mb-5 text-center p-3"><b>{{ post.title }}</b></h1>
     <div class="row m-0 text-muted">
-        <p class="mr-3">Created by <i class="fa fa-user"></i> {{ post.author }}</p>
+        <p class="mr-3">Created by {% if post.author.image is not null %}
+            <a href="/alumni/profile={{post.author.id}}" class='text-decoration-none'>
+            <img src="{{ asset('img/profile_pictures/' ~ post.author.image) }}" class='thumbnail'> 
+        {% else %}
+            <i class='fas fa-user'></i>
+        {% endif %} {{ post.author }}</a></p>
             {{ include('pages/_post_tags.html.twig') }}
         <span class="ml-auto"><i class="fa fa-calendar"></i> {{ post.createdAt | date('j. F Y H:m')}} </span>
     </div>
@@ -44,12 +49,13 @@
 {% for comment in post.comments %}
     <div class='card mt-4 text-dark'>
         <div class="card-header">
+            <a href="/alumni/profile={{comment.author.id}}" class='text-decoration-none'>
             {% if comment.author.image is not null %}
                 <img src="{{ asset('img/profile_pictures/' ~ comment.author.image) }}" class='comment-thumbnail img-fluid'>
             {% else %}
                 <i class='fas fa-user'></i>
             {% endif %} 
-            <strong>{{ comment.author }}</strong> <span class='ml-5'>{{ comment.createdAt| date('j. F Y H:m') }}</span>
+            <strong>{{ comment.author }}</strong></a> <span class='pt-3 span-right'>{{ comment.createdAt| date('j. F Y H:m') }}</span>
         </div>
         <div class="card-body">
             {{ comment.content }}
@@ -63,6 +69,10 @@
 </div>
 
 <style>
+.span-right {
+    float: right;
+}
+
 .comment-thumbnail {
     height: 8vh;
     width: 8vh;
