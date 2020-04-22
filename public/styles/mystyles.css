@@ -43,7 +43,7 @@ font-weight: bold;
 .appear {
 	position: relative;
   animation-name: appear;
-  animation-duration: 5s;
+  animation-duration: 2s;
 }
 
 @keyframes appear{
