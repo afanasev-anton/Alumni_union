@@ -19,7 +19,7 @@
 				<p> E-mail:<span style="font-style: italic"> {{user.email}} </span> </p>
 				<p> Telephone:<span style="font-style: italic"> {{user.tel}}</span></p>
 				<br>
-				<p> Date of birth:<span style="font-style: italic"> {{user.birth}}</span> </p>
+				<p> Date of birth:<span style="font-style: italic">{{ user.birth| date('j. F Y ') }}</span> </p>
 				<p> Nationality:<span style="font-style: italic">{{user.nation}}</span></p>
            	</div>
           	<div class="col-2">

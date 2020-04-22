@@ -84,7 +84,7 @@ transition: all 0.7s;
 
 .story:hover {
   filter:none;
-  border: solid #CD0200 10px;
+  border: solid #CD0200 5px;
 }
 
 .story .show{
@@ -124,32 +124,53 @@ transition: all 0.7s;
 }
 
 .Story {
+position: relative;
+transition: all 0.7s;
+}
 
-transform: perspective(1px) translateZ(0);
-box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-transition-duration: 0.3s;
-transition-property: transform;
-} 
+.Story a {
+  color: darkgrey;
+  text-decoration: none;
+}
 
 .Story:hover {
-  border: solid #CD0200 5px;
-  background: linear-gradient(40deg,coral,#CD0200);
+ /*border: solid #CD0200 5px;*/
+background: linear-gradient(75deg,coral,#CD0200,#CD0200,#CD0200);
+color:  black;
 }
+
+.Story:hover a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.Story_prova.card {
+   border: solid #CD0200 5px;
+}
+
+.Story_prova.card h1{
+   color: #CD0200;
+}
+
 
 /*Here there the career class. Is on the color bright-blue/info. If you just add career class 
 the background will become blue when you hover -and the text black. To add the buzz animation just 
 add "hvr-buzz-out" class near the career class*/
 
 
+
 .career {
-padding-top: 15px;
 filter: grayscale(100%);
-transition-duration: 0.5s;
+display:table-cell;
+background-size:cover;
+position: relative;
+transition-duration: 0.7s;
 }
 
 .career:hover {
  filter: none;
- background: linear-gradient(40deg,#3399F3,#446E9B);
+ background: linear-gradient(75deg,#4DA6F4,#3399F3, #206098);
  color: black;
 }
 
@@ -215,20 +236,19 @@ transition-duration: 0.5s;
 }
 
 .Career {
-padding:8px;
 position: relative;
+transition: all 0.7s;
+}
 
-transform: perspective(1px) translateZ(0);
-box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-transition-duration: 0.7s;
-transition-property: transform;
+.Career a {
+  color: darkgrey;
+  text-decoration: none;
 }
 
 .Career:hover {
- padding:10px; 
-border: solid #446E9B 10px;
- background: linear-gradient(40deg,#3399F3,#446E9B);
- color: black;
+ /*border: solid #4DA6F4 5px;*/
+ background: linear-gradient(75deg,#4DA6F4,#3399F3, #206098);
+ color:  black;
 }
 
 .Career:hover a {
@@ -237,52 +257,100 @@ border: solid #446E9B 10px;
   text-decoration: none;
 }
 
+.Offer_prova.card {
+   border: solid #5B80A8 5px;
+}
+
+.Offer_prova.card h1 {
+   color: #5B80A8;
+}
+
+
 
 
 /*Here there the event class. Is on the color orange/warning. Hover it and it will become 
 bigger with and orange background*/
 
 .event {
-padding:10px;
+filter: grayscale(100%);
+display:table-cell;
+background-size:cover;
 position: relative;
-text-align: center;
-color: black;
-filter: grayscale(100%);	
-
-transform: perspective(1px) translateZ(0);
-box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-transition-duration: 0.3s;
-transition-property: transform;
-}
+transition: all 0.7s;
+} 
 
 .event:hover {
-  filter: none;
-  padding: 12px;
-  background: linear-gradient(40deg,#F8C471,#D47500);
-  transform: scale(1.1);
+  filter:none;
+  border: solid rgba(212,117,0,1) 5px;
 }
 
-.Event {
-padding:8px;
-position: relative;
-color: black;
+.event .show{
+  background-color:rgba(19,30,33,0.4);
+  position: absolute;
+  z-index: 1000;
+  top:0;left:0;right:0;bottom:0;
+  transition: all 0.7s;
+}
 
-transform: perspective(1px) translateZ(0);
-box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-transition-duration: 0.7s;
-transition-property: transform;
+.event .stripe_title{
+  position: absolute;
+  text-transform: uppercase;
+  padding: 7px;
+  z-index: 1000;
+  top:60%;left:-80%;
+  color:#ffffff;
+  font-weight: 300;
+  font-size: 13px; width: 80%;
+
+}
+.event:hover .stripe_title{
+  background-color:rgba(212,117,0,1); left:0px;
+}
+.event .stripe_subtitle{
+  position: absolute;
+  padding: 5px;
+  z-index: 1000;
+  top:60%;right:-85%;
+  margin-top: 25px;
+  color:#ffffff;
+  font-weight: 300;
+  font-size: 11px; width: 80%;
+}
+.event:hover .stripe_subtitle{
+  background-color:rgba(217, 134, 32,1); right:0px;
+}
+
+
+  /*background: linear-gradient(40deg,#F8C471,#D47500);*/
+
+.Event {
+position: relative;
+transition: all 0.7s;
+}
+
+.Event a {
+  color: darkgrey;
+  text-decoration: none;
 }
 
 .Event:hover {
-  padding: 10px;
-  background: linear-gradient(40deg,#F8C471,#D47500);
- border: solid #D47500 10px;
+ /*border: solid #D47500 5px;*/
+ background: linear-gradient(40deg,#F8C471,#D47500,#D47500);
+ color:  black;
 }
 
 .Event:hover a {
   color: white;
   font-weight: bold;
   text-decoration: none;
+}
+
+.Event_prova.card {
+   border: solid #D47500 5px;
+}
+
+.Event_prova.card h1 {
+   color: #D47500;
 }
 
 /*Here there the alumni class. Is on the color green/success. Hover it and it will "bloom" 
