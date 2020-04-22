@@ -1,0 +1,364 @@
+/* Just the measure for the logo on navbar */
+
+img.navbar-brand {
+	height: 80px;
+}
+
+/*the coloured links, hoverable, for every path*/
+
+a.homelink:hover {
+color: #333!important;
+font-weight: bold;
+}
+
+a.storylink:hover {
+color: #CD0200 !important;
+font-weight: bold;
+}
+
+a.eventlink:hover {
+color:  #D47500!important;
+font-weight: bold;
+}
+
+a.careerlink:hover {
+color: #3399F3!important;
+font-weight: bold;
+}
+
+a.alumnilink:hover {
+color: #3CB521!important;
+font-weight: bold;
+}
+
+.link{
+	/*padding: 5px;*/
+	color:#333;
+	/*text-decoration: none;*/
+}
+
+
+/* The animation to make everything slide from left. Put this class near a container div */
+
+.appear {
+	position: relative;
+  animation-name: appear;
+  animation-duration: 1.5s;
+}
+
+@keyframes appear{
+  0%   {left:-2000px; top:0px;}
+  100%  {left:0px; top:0px;}
+}
+
+/*just to make a card-columns not so crampy and being secure that avarything is diplayed near
+ and not only one under others post */
+
+.card-columns {
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+  column-break-inside: avoid;
+}
+
+
+/* Here start the "story" class. The color is red/danger. If just add just the "story" 
+class to the div you will obtain a red border when hover. To obtain the stripes that appears 
+if you hover you have to 1) create a div with a an image as background 2) set the div with a 
+width & height. If you don´t you cannot see the animation because the div is flat. 
+Then you have to add this code on htlm: 
+                <div class='show'>
+                 <div class='stripe_title'>"I did it!"</div>
+                <div class='stripe_subtitle'><a href='story.php' style='color:white;''>Want to know how?</a> </div>
+                </div>
+                </div>  
+  "stripe_title" and "stripe_subtitle" are the two red stripes with the writing on it that
+  will appear if you hover it. Of course you can change what will be written in the stripes. */ 
+
+.story {
+filter: grayscale(100%);
+display:table-cell;
+background-size:cover;
+position: relative;
+transition: all 0.7s;
+} 
+
+.story:hover {
+  filter:none;
+  border: solid #CD0200 10px;
+}
+
+.story .show{
+  background-color:rgba(19,30,33,0.4);
+  position: absolute;
+  z-index: 1000;
+  top:0;left:0;right:0;bottom:0;
+  transition: all 0.7s;
+}
+
+.story .stripe_title{
+  position: absolute;
+  text-transform: uppercase;
+  padding: 7px;
+  z-index: 1000;
+  top:60%;left:-80%;
+  color:#ffffff;
+  font-weight: 300;
+  font-size: 13px; width: 80%;
+
+}
+.story:hover .stripe_title{
+  background-color:indianred; left:0px;
+}
+.story .stripe_subtitle{
+  position: absolute;
+  padding: 5px;
+  z-index: 1000;
+  top:60%;right:-85%;
+  margin-top: 25px;
+  color:#ffffff;
+  font-weight: 300;
+  font-size: 11px; width: 80%;
+}
+.story:hover .stripe_subtitle{
+  background-color:crimson; right:0px;
+}
+
+.Story {
+
+transform: perspective(1px) translateZ(0);
+box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+transition-duration: 0.3s;
+transition-property: transform;
+} 
+
+.Story:hover {
+  border: solid #CD0200 5px;
+  background: linear-gradient(40deg,coral,#CD0200);
+}
+
+/*Here there the career class. Is on the color bright-blue/info. If you just add career class 
+the background will become blue when you hover -and the text black. To add the buzz animation just 
+add "hvr-buzz-out" class near the career class*/
+
+
+.career {
+padding-top: 15px;
+filter: grayscale(100%);
+transition-duration: 0.5s;
+}
+
+.career:hover {
+ filter: none;
+ background: linear-gradient(40deg,#3399F3,#446E9B);
+ color: black;
+}
+
+@-webkit-keyframes hvr-buzz-out {
+  10% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+  20% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+  30% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+  40% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+  50% {
+    -webkit-transform: translateX(2px) rotate(1deg);
+    transform: translateX(2px) rotate(1deg);
+  }
+  60% {
+    -webkit-transform: translateX(-2px) rotate(-1deg);
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  70% {
+    -webkit-transform: translateX(2px) rotate(1deg);
+    transform: translateX(2px) rotate(1deg);
+  }
+  80% {
+    -webkit-transform: translateX(-2px) rotate(-1deg);
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  90% {
+    -webkit-transform: translateX(1px) rotate(0);
+    transform: translateX(1px) rotate(0);
+  }
+  100% {
+    -webkit-transform: translateX(-1px) rotate(0);
+    transform: translateX(-1px) rotate(0);
+  }
+}
+
+.hvr-buzz-out {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+.hvr-buzz-out:hover, .hvr-buzz-out:focus, .hvr-buzz-out:active {
+  -webkit-animation-name: hvr-buzz-out;
+  animation-name: hvr-buzz-out;
+  -webkit-animation-duration: 0.75s;
+  animation-duration: 0.75s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+}
+
+.Career {
+padding:8px;
+position: relative;
+
+transform: perspective(1px) translateZ(0);
+box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+transition-duration: 0.7s;
+transition-property: transform;
+}
+
+.Career:hover {
+ padding:10px; 
+border: solid #446E9B 10px;
+ background: linear-gradient(40deg,#3399F3,#446E9B);
+ color: black;
+}
+
+.Career:hover a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+
+
+/*Here there the event class. Is on the color orange/warning. Hover it and it will become 
+bigger with and orange background*/
+
+.event {
+padding:10px;
+position: relative;
+text-align: center;
+color: black;
+filter: grayscale(100%);	
+
+transform: perspective(1px) translateZ(0);
+box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+transition-duration: 0.3s;
+transition-property: transform;
+}
+
+.event:hover {
+  filter: none;
+  padding: 12px;
+  background: linear-gradient(40deg,#F8C471,#D47500);
+  transform: scale(1.1);
+}
+
+.Event {
+padding:8px;
+position: relative;
+color: black;
+
+transform: perspective(1px) translateZ(0);
+box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+transition-duration: 0.7s;
+transition-property: transform;
+}
+
+.Event:hover {
+  padding: 10px;
+  background: linear-gradient(40deg,#F8C471,#D47500);
+ border: solid #D47500 10px;
+}
+
+.Event:hover a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/*Here there the alumni class. Is on the color green/success. Hover it and it will "bloom" 
+with a circular "unveil" effect and add a stripe with the quote. Is a miy between new animation 
+and the story animation*/
+
+.alumni {
+  position: relative; 
+  overflow: hidden;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  filter: grayscale(100%);
+}
+.alumni img{
+  width: 100%;
+  height: 100%;
+}
+.alumni::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    display: block;
+    content: '';
+    width: 0;
+    height: 0;
+    background: rgba(0,0,0,.2);
+    border-radius: 100%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+.alumni:hover{
+  animation: bloom ease-in-out .75s forwards;
+}
+.alumni:hover::before {
+    animation: circle .75s;
+}
+@keyframes bloom {
+    0% {
+        filter: grayscale(.9);
+    }
+    40% {
+        filter: grayscale(.5);
+    }
+    100% {
+        filter: grayscale(0);
+    }
+}
+@keyframes circle {
+    0% {
+        opacity: .5;
+    background: rgba(53, 158, 29,.2);
+    
+    }
+    40% {
+        opacity: 1;
+    background: rgba(37, 113, 21,.2);
+    }
+    100% {
+        width: 200%;
+        height: 200%;
+        opacity: 0;
+    }
+}
+.alumni .stripe_title{
+  position: absolute;
+  text-transform: uppercase;
+  padding: 7px;
+  top:60%;left:-100%;
+  color:#ffffff;
+  font-weight: 250;
+  font-size: 13px; 
+  width: 100%;
+
+}
+.alumni:hover .stripe_title{
+  background-color:green; left:0px;
+}

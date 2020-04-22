@@ -106,6 +106,31 @@ class User implements UserInterface, \Serializable
      */
     private $imageFile;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $tel;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $birth;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $course;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nation;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $address;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -369,5 +394,65 @@ class User implements UserInterface, \Serializable
             $this->username,
             $this->password
         ] = \unserialize($serialized, [self::class]);
+    }
+
+    public function getTel(): ?string
+    {
+        return $this->tel;
+    }
+
+    public function setTel(?string $tel): self
+    {
+        $this->tel = $tel;
+
+        return $this;
+    }
+
+    public function getBirth(): ?\DateTimeInterface
+    {
+        return $this->birth;
+    }
+
+    public function setBirth(?\DateTimeInterface $birth): self
+    {
+        $this->birth = $birth;
+
+        return $this;
+    }
+
+    public function getCourse(): ?string
+    {
+        return $this->course;
+    }
+
+    public function setCourse(?string $course): self
+    {
+        $this->course = $course;
+
+        return $this;
+    }
+
+    public function getNation(): ?string
+    {
+        return $this->nation;
+    }
+
+    public function setNation(?string $nation): self
+    {
+        $this->nation = $nation;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
     }
 }

@@ -1,20 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Alumni{% endblock %}
+{% block title %}{{tag}}| PASF Alumni Association{% endblock %}
 
 {% block main %}
     {% if posts|length > 0 %}
         {% for post in posts %}
-            <div class="mb-4 p-3">
+
+            <div class="card {{tag}} mb-4 p-3">
                 <h2>
-                    <a href="{{ path('showPost', {slug: post.slug}) }}">
+                    <a href="{{ path('showPost', {slug: post.slug}) }}" class="link">
                         {{ post.title }}
                     </a>
                 </h2>
-                <p>{{ post.content[:50] ~ '...' }}</p>  
+                <p>{{ post.content[:80] ~ '...' }}</p>  
                 <div class="row m-0 text-muted">
                     <p class="mr-3">Created by <i class="fa fa-user"></i> {{ post.username }}</p>
-                        {{ include('pages/_show_tags.html.twig') }}
+                    {{ include('pages/_show_tags.html.twig') }}
                     <span class="ml-auto"><i class="fa fa-calendar"></i> {{ post.created_at | date('j. F Y H:m')}} </span>
                 </div>
             </div>

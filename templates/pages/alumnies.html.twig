@@ -3,15 +3,24 @@
 {% block title %}Alumni Association | Members{% endblock %}
 
 {% block body %}
-
-	<h1>List of Alumni</h1>
-
-	{% for user in users %}
-		<p>{{user.username}} | <a href="/alumni/profile={{user.id}}">{{user.email}}</a> | 
-			{% for role in user.roles %}
-				{{role}}
-			{% endfor %}
-		</p>
-	{% endfor %}
-
+	<div class"container appear">
+		<h1>List of Alumni</h1>
+		<div class="card-columns">
+		{% for user in users %}
+			<div class="card bg-light alumni" style="padding:10px;">
+			<div class="row">
+			<div class="col text-center">
+			<img src="img/profile_pictures/{{user.image}}" style="width:100px; height:100px; border-radius:50%; padding:5px;">
+			</div>
+			<div class="col">
+			<h3><a href="/alumni/profile={{user.id}}" class="link alumnilink"> {{user.firstName}} {{user.lastName}} </a> <br>
+			<a href="/alumni/profile={{user.id}}" class="btn btn-success btn-sm"> See personal profile</a></h3>
+			
+			</p>
+			</div>
+			</div>
+			</div>
+		{% endfor %}
+		</div>
+	</div>
 {% endblock %}
