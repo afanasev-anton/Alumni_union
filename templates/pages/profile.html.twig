@@ -3,57 +3,56 @@
 {% block title %}Alumni | {{user.firstName}}{{user.lastName}}{% endblock %}
 
 {% block body %}
-	  <div class="container">
-        <div class="card bg-light text-center">
-          <h1><span>{{user.firstName}} {{user.lastName}}</span></h1>
-        </div>
-      <br>
-      <div class="card bg-light" style="padding:10px;">
-        <div class="row">
-         	<div class="col-2 d-none d-md-block">
-         	<p style="text-transform:uppercase;"> <b> Personal information: </b> </p>
-         	</div>
-        <div class="col-7">
-              <img class="d-xl-none d-md-none d-lg-none" src="/img/profile_pictures/{{user.image}}" style="width:200px; height:200px; padding:5px;border-radius: 50%;">
-				<p> E-mail:<span style="font-style: italic"> {{user.email}} </span> </p>
-				<p> Telephone:<span style="font-style: italic"> {{user.tel}}</span></p>
-				<br>
-				<p> Date of birth:<span style="font-style: italic">{{ user.birth| date('j. F Y ') }}</span> </p>
-				<p> Nationality:<span style="font-style: italic">{{user.nation}}</span></p>
-           	</div>
-        <div class="col-2 d-none  d-md-block">
-          		<img src="/img/profile_pictures/{{user.image}}" style="width:200px; height:200px; padding:5px;">
-        </div>
-         </div>
-          <div class="row">
-          <hr>
-          </div>
-         <div class="row">
-         	<div class="col-2 d-none d-md-block">
-         	<p  style="text-transform: uppercase;"> <b> Course: </b> </p>
-         	</div>
-          	<div class="col-8">
-				<p> Course/es:<span style="font-style: italic"> {{user.course}}</span></p>
-				<p> Other skills:<span style="font-style: italic"> {{user.skills}}</span> </p>
-				<p> Portfolio url:<span class="link alumnilink" style="font-style: italic"><a href="{{user.github}}"> {{user.github}}</a></span></p>
-        <br>
-                            {% if (app.user.id == user.id) %}
-    <a href="/alumni/profile={{user.id}}/edit" class=" d-xl-none d-md-none d-lg-none btn btn-dark ">Edit</a>
-  {% endif %}
 
-           	</div>
-           	    <div class="col-2 text-center d-none  d-md-block">
-           	    		{% if (app.user.id == user.id) %}
-		<a href="/alumni/profile={{user.id}}/edit" class="btn btn-dark">Edit</a>
-	{% endif %}
-          	</div>
-        </div> 		
+    <div class="card bg-light p-2 text-center mb-4">
+      <h1>{{user.firstName}} {{user.lastName}}</h1>
     </div>
-        <br>
-    <div class="card bg-light text-center" style="padding:10px;">
-    <p class="text-center"><span style="font-style: italic">{{user.descr}}</p>
-    </div>
-      <br>
+    
+    <div class="card bg-light p-2 mb-4">
+      <div class="w-50 mx-auto d-md-none">
+        <img class="img-fluid" src="{{ asset('img/profile_pictures/' ~ user.image) }}">        
+      </div>
+      
+      <div class="row no-gutters mb-4">
+        <div class="col-12 col-md-2 p-2">
+          <p class="text-uppercase"><b>Personal information:</b></p>
+        </div>
+        <div class="col-12 col-md-8 p-2">
+          <p> E-mail:<span class="font-italic"> {{user.email}} </span> </p>
+          <p> Telephone:<span class="font-italic"> {{user.tel}}</span></p>
+          <br>
+          <p> Date of birth:<span class="font-italic">{{ user.birth| date('j. F Y ') }}</span> </p>
+          <p> Nationality:<span class="font-italic">{{user.nation}}</span></p>
+        </div>
+        <div class="col-12 col-md-2 p-2 d-none d-md-block">
+          <img src="{{ asset('img/profile_pictures/' ~ user.image) }}" class="img-fluid">
+        </div>
+      </div>
+      
+      <div class="row no-gutters">
+        <div class="col-12 col-md-2 p-2">
+          <p class="text-uppercase"><b>Course:</b></p>
+        </div>
 
- </div>
+        <div class="col-12 col-md-8 p-2">
+          <p> Course/es:<span class="font-italic"> {{user.course}}</span></p>
+          <p> Other skills:<span class="font-italic"> {{user.skills}}</span> </p>
+          <p> Github repository:<span class="font-italic"><a href="{{user.github}}"> {{user.github}}</a></span></p>
+        </div>
+        
+        <div class="col-12 text-center p-2 d-md-none">
+          <p class="text-center font-italic">{{user.descr}}</p>
+        </div>
+
+        <div class="col-12 col-md-2 p-2" >
+          {% if (app.user.id == user.id) %}
+            <a href="/alumni/profile={{user.id}}/edit" class="btn btn-outline-dark w-100">Edit</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    
+    <div class="card bg-light text-center mb-4 d-none d-md-block">
+      <p class="text-center font-italic">{{user.descr}}</p>
+    </div>
 {% endblock %}
