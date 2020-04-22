@@ -358,12 +358,22 @@ with a circular "unveil" effect and add a stripe with the quote. Is a miy betwee
 and the story animation*/
 
 .alumni {
-  position: relative; 
+  /*position: relative; 
   overflow: hidden;
   margin: 0;
   height: 100%;
-  width: 100%;
+  width: 100%;*/
   filter: grayscale(100%);
+}
+.alumni-thumb {
+  border-radius:50%;
+  overflow: hidden;
+  width: 120px;
+  height: 120px;
+}
+.alumni-thumb img{
+  width: 100%!important;
+  height: auto!important;
 }
 .alumni img{
   width: 100%;
