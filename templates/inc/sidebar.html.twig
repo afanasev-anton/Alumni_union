@@ -6,7 +6,7 @@
     <ul>
 {% for post in posts %}
     
-        <li><a href="{{ path('showPost', {slug: post.slug}) }}">
+        <li><a href="{{ path('showPost', {slug: post.slug}) }}" class="link alumnilink">
             {{ post.title }}
         </a></li>
     
