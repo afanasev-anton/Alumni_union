@@ -4,10 +4,28 @@
 
 {% block body %}
 	<div class"container appear">
-		<h1>List of Alumni</h1>
-		<div class="card-columns">
+		<h1>Our Members</h1>
+		<div class="row">
+			{% for user in users %}
+				<div class="col-12 col-sm-6 col-lg-4 p-3">
+					<div class="card bg-light alumni p-2 d-flex flex-row">
+						<div class="w-50 p-1">
+							<div class="alumni-thumb">
+								<img src="{{ asset('img/profile_pictures/' ~ user.image) }}">
+							</div>							
+						</div>
+						<div class="w-50 p-1">
+							<h3 class="alumni">{{user.firstName}}<br>{{user.lastName}}</h3>
+							<a href="/alumni/profile={{user.id}}" class="btn btn-success btn-sm stretched-link">See personal profile</a>
+						</div>
+					</div>
+				</div>				
+			{% endfor %}
+		</div>
+
+		{#<div class="card-columns">
 		{% for user in users %}
-			<div class="card bg-light alumni" style="padding:10px;">
+			<div class="card bg-light alumni" style="padding:10px;>
 			<div class="row">
 			<div class="col text-center">
 			<img src="img/profile_pictures/{{user.image}}" style="width:100px; height:100px; border-radius:50%; padding:5px;">
@@ -21,6 +39,6 @@
 			</div>
 			</div>
 		{% endfor %}
-		</div>
+		</div>#}
 	</div>
 {% endblock %}
