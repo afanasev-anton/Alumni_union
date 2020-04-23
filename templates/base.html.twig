@@ -15,7 +15,8 @@
     </head>
     <body>
         {% include "inc/navbar.html.twig" %}
-                <div class="container body-container">
+        
+        <div class="container body-container">
             {% block body %}
                 <div class="row">
                     <div id="main" class="col-md-9">
@@ -34,6 +35,8 @@
                 </div>
             {% endblock %}
         </div>
+
+        {% include "inc/footer.html.twig" %}
 
         
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

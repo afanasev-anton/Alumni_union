@@ -451,3 +451,10 @@ font-weight: bold;
   background-color:green; left:0px;
 }
 
+footer {
+  height: 10em;
+}
+
+.twitter {
+  color: rgb(135, 199, 221);
+}
