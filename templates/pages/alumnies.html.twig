@@ -15,7 +15,7 @@
 							</div>							
 						</div>
 						<div class="w-50 p-1">
-							{% if not is_granted('ROLE_COMPANY') %}
+							{% if is_granted('ROLE_ALUMNI') or is_granted('ROLE_ADMIN') %}
 								<h3 class="alumni">{{user.firstName}}<br>{{user.lastName}}</h3>
 							{% else %}
 								<h3 class="alumni">{{user.firstName}}</h3>
