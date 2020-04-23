@@ -35,6 +35,12 @@ class PostRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
+    public function findByTitle($value)
+    {
+        $sql = "SELECT u FROM App:Post u WHERE u.title LIKE '%$value%' AND u.content LIKE '%$value%'";
+        return $this->getEntityManager()->createQuery($sql)->getResult();
+    }
+
 
 
     // public function findByTag($value)
