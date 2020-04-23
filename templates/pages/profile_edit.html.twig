@@ -15,6 +15,11 @@
 						{{ form_widget(form.lastName) }}
 					</div>
 				</div>
+				{% if is_granted('ROLE_COMPANY') %}
+					<div class="col mx-auto">
+						<span class="small">Company name: </span> {{ form_widget(form.lastName) }}
+					</div>
+				{% endif %}
 		    </div>
 		    
 		    <div class="card bg-light p-2 mb-4">

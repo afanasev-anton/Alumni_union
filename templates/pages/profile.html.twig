@@ -5,7 +5,15 @@
 {% block body %}
 
     <div class="card bg-light p-2 text-center mb-4">
-      <h1>{{user.firstName}} {{user.lastName}}</h1>
+      {% if is_granted('ROLE_ALUMNI') or is_granted('ROLE_ADMIN') %}
+        <h1>{{user.firstName}} {{user.lastName}}</h1>
+      {% else %}
+        <h1>{{user.firstName}}</h1>
+      {% endif %}
+      {% if is_granted('ROLE_COMPANY') and (app.user.id == user.id) %}
+        <h1><span class="small">Company name: </span>{{user.lastName}}</h1>
+      {% endif %}
+
     </div>
     
     <div class="card bg-light p-2 mb-4">
@@ -14,6 +22,7 @@
       </div>
       
       {% if is_granted('ROLE_ALUMNI') or is_granted('ROLE_ADMIN') %}
+        
         <div class="row no-gutters mb-4">
           <div class="col-12 col-md-2 p-2">
             <p class="text-uppercase"><b>Personal information:</b></p>
@@ -51,10 +60,9 @@
             {% endif %}
           </div>
         </div>
-      {#{% endif %}
       
-      {% if is_granted('ROLE_COMPANY') %}#}
       {% else %}
+        {% if not (app.user.id == user.id) %}
         <div class="row no-gutters">
           <div class="col-12 col-md-2 p-2">
             <p class="text-uppercase"><b>Course:</b></p>
@@ -74,6 +82,45 @@
             <img src="{{ asset('img/profile_pictures/' ~ user.image) }}" class="img-fluid">
           </div>
         </div>
+        {% endif %}
+
+        {# COMPANY PROFILE #}
+        {% if is_granted('ROLE_COMPANY') and (app.user.id == user.id) %}
+          <div class="row no-gutters mb-4">
+            <div class="col-12 col-md-2 p-2">
+              <p class="text-uppercase"><b>information:</b></p>
+            </div>
+            <div class="col-12 col-md-8 p-2">
+              <p>E-mail: <span class="font-italic"> {{user.email}} </span> </p>
+              <p>Telephone: <span class="font-italic"> {{user.tel}}</span></p>
+            </div>
+            <div class="col-12 col-md-2 p-2 d-none d-md-block">
+              {% if user.image %}
+              <img src="{{ asset('img/profile_pictures/' ~ user.image) }}" class="img-fluid">
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="row no-gutters">
+            <div class="col-12 col-md-2 p-2"></div>
+
+            <div class="col-12 col-md-8 p-2">
+              <p> Web page: <span class="font-italic"><a href="{{user.github}}"> {{user.github}}</a></span></p>
+            </div>
+            
+            <div class="col-12 text-center p-2 d-md-none">
+              <p class="text-center font-italic">{{user.descr}}</p>
+            </div>
+
+            <div class="col-12 col-md-2 p-2" >
+              {% if (app.user.id == user.id) %}
+                <a href="/alumni/profile={{user.id}}/edit" class="btn btn-outline-dark w-100">Edit</a>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+        {# END OF COMPANY PROFILE #}
+
       {% endif %}
     
     </div>
