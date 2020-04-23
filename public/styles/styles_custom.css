@@ -75,7 +75,7 @@ Then you have to add this code on htlm:
   will appear if you hover it. Of course you can change what will be written in the stripes. */ 
 
 .story {
-filter: grayscale(100%);
+/*filter: grayscale(100%);*/
 display:table-cell;
 background-size:cover;
 position: relative;
@@ -104,10 +104,13 @@ transition: all 0.7s;
   color:#ffffff;
   font-weight: 300;
   font-size: 13px; width: 80%;
+  display: none;
 
 }
 .story:hover .stripe_title{
+  display: inline;
   background-color:indianred; left:0px;
+
 }
 .story .stripe_subtitle{
   position: absolute;
@@ -160,7 +163,7 @@ add "hvr-buzz-out" class near the career class*/
 
 
 .career {
-filter: grayscale(100%);
+/*filter: grayscale(100%);*/
 display:table-cell;
 background-size:cover;
 position: relative;
@@ -271,7 +274,7 @@ transition: all 0.7s;
 bigger with and orange background*/
 
 .event {
-  filter: grayscale(100%);
+  /*filter: grayscale(100%);*/
   display:table-cell;
   background-size:cover;
   position: relative;
