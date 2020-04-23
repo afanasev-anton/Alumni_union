@@ -7,7 +7,14 @@
 	{% if (app.user.id == user.id) %}
 		{{ form_start(form) }}
 			<div class="card bg-light p-2 text-center mb-4">
-		      <h1>{{ form_widget(form.firstName) }} {{ form_widget(form.lastName) }}</h1>
+				<div class="row">
+					<div class="col">
+						{{ form_widget(form.firstName) }}
+					</div>
+					<div class="col">
+						{{ form_widget(form.lastName) }}
+					</div>
+				</div>
 		    </div>
 		    
 		    <div class="card bg-light p-2 mb-4">
@@ -16,15 +23,41 @@
 			          <p class="text-uppercase"><b>Personal information:</b></p>
 			        </div>
 			        <div class="col-12 col-md-8 p-2">
-			          <p> E-mail:<span class="font-italic">{{ form_widget(form.email)}} </span> </p>
-			          <p> Telephone:<span class="font-italic">{{ form_widget(form.tel)}}</span></p>
-			          <br>
-			          <p> Date of birth:<span class="font-italic">{{ form_widget(form.birth)}}</span> </p>
-			          <p> Nationality:<span class="font-italic">{{ form_widget(form.nation)}}</span></p>
+			        	<span class="d-flex flex-row mb-1">
+			        		<p class="w-25">E-mail: </p>{{ form_widget(form.email)}}
+			        	</span>
+			        	<span class="d-flex flex-row mb-1">
+			        		<p class="w-25">Telephone: </p>{{ form_widget(form.tel)}}
+			        	</span>
+			        	<br>
+			        	<span class="d-flex flex-row mb-1">
+			        		<p class="w-25">Date of birth: </p>{{ form_widget(form.birth)}}
+			        	</span>
+			        	<span class="d-flex flex-row mb-1">
+			        		<p class="w-25">Nationality: </p>{{ form_widget(form.nation)}}
+			        	</span>
+
+			        	<div class="custom-control custom-switch">
+			        		{{ form_widget(form.hasJob)}}
+			        		{{ form_label(form.hasJob, 'Job', {
+				        		'label_attr': {'class': 'custom-control-label'}
+				        	}) }}
+				        </div>
 			        </div>
 			        <div class="col-12 col-md-2 p-2 d-none d-md-block">
-			          <img src="{{ asset('img/profile_pictures/' ~ user.image) }}" class="img-fluid">
+			        	<img src="{{ asset('img/profile_pictures/' ~ user.image) }}" class="img-fluid">
+			        	<div class="custom-file w-100 mt-2">
+			    			{{ form_widget(form.imageFile)}}
+			    			{{ form_label(form.imageFile, 'Photo', {
+				        		'label_attr': {'class': 'custom-file-label'}
+				        	}) }}
+			    		</div>
 			        </div>
+			    </div>
+			    <div class="row no-gutters mb-4">
+			    	<div class="col-12 col-md-8 p-2 mx-auto">
+			    		{{ form_widget(form.descr)}}
+			    	</div>
 			    </div>
 
 			    <div class="row no-gutters mb-4">
@@ -32,24 +65,31 @@
 			          <p class="text-uppercase"><b>Course:</b></p>
 			        </div>
 			        <div class="col-12 col-md-8 p-2">
-			          <p> Course/es:<span class="font-italic">{{ form_widget(form.course)}}</span></p>
-			          <p> Other skills:<span class="font-italic">{{ form_widget(form.skills)}}</span> </p>
-			          <p> Github repository:<span class="font-italic"><a href="{{user.github}}">{{ form_widget(form.github)}}</a></span></p>
+			        	<span class="d-flex flex-row mb-1">
+			        		<p class="w-25">Course/es: </p>{{ form_widget(form.course)}}
+			        	</span>
+			        	<span class="d-flex flex-row mb-1">
+			        		<p class="w-25">Other skills: </p>{{ form_widget(form.skills)}}
+			        	</span>
+			        	<span class="d-flex flex-row mb-1">
+			        		<p class="w-25">Github repository: </p>{{ form_widget(form.github)}}
+			        	</span>
 			        </div>
-			        <div class="col-12 d-md-none">
-			        	<p class="text-center">{{ form_widget(form.descr)}}</p>
+			        
+			        <div class="col-12 col-md-2 p-2">
+			        	{{ form_widget(form.save)}}
 			        </div>
-			        <div class="col-12 col-md-2 p-2" >
-			          {{ form_widget(form.save)}}
-			        </div>
-			    </div>
-
-			    <div class="row no-gutters text-center">
-			    	<p class="text-center"><span class="font-italic">{{ form_widget(form.descr)}}</span></p>
 			    </div>
 			</div>
 
 		{{ form_end(form) }}
 	{% endif %}
 
+<script>
+	// Add the following code if you want the name of the file appear on select
+	$(".custom-file-input").on("change", function() {
+	  var fileName = $(this).val().split("\\").pop();
+	  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+	});
+</script>
 {% endblock %}

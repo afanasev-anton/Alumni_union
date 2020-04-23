@@ -18,11 +18,11 @@
           <p class="text-uppercase"><b>Personal information:</b></p>
         </div>
         <div class="col-12 col-md-8 p-2">
-          <p> E-mail:<span class="font-italic"> {{user.email}} </span> </p>
-          <p> Telephone:<span class="font-italic"> {{user.tel}}</span></p>
+          <p>E-mail: <span class="font-italic"> {{user.email}} </span> </p>
+          <p>Telephone: <span class="font-italic"> {{user.tel}}</span></p>
           <br>
-          <p> Date of birth:<span class="font-italic">{{ user.birth| date('j. F Y ') }}</span> </p>
-          <p> Nationality:<span class="font-italic">{{user.nation}}</span></p>
+          <p>Date of birth: <span class="font-italic">{{ user.birth| date('j. F Y ') }}</span> </p>
+          <p>Nationality: <span class="font-italic">{{user.nation}}</span></p>
         </div>
         <div class="col-12 col-md-2 p-2 d-none d-md-block">
           <img src="{{ asset('img/profile_pictures/' ~ user.image) }}" class="img-fluid">
@@ -35,9 +35,9 @@
         </div>
 
         <div class="col-12 col-md-8 p-2">
-          <p> Course/es:<span class="font-italic"> {{user.course}}</span></p>
-          <p> Other skills:<span class="font-italic"> {{user.skills}}</span> </p>
-          <p> Github repository:<span class="font-italic"><a href="{{user.github}}"> {{user.github}}</a></span></p>
+          <p> Course/es: <span class="font-italic"> {{user.course}}</span></p>
+          <p> Other skills: <span class="font-italic"> {{user.skills}}</span> </p>
+          <p> Github repository: <span class="font-italic"><a href="{{user.github}}"> {{user.github}}</a></span></p>
         </div>
         
         <div class="col-12 text-center p-2 d-md-none">
@@ -52,7 +52,7 @@
       </div>
     </div>
     
-    <div class="card bg-light text-center mb-4 d-none d-md-block">
+    <div class="card bg-light p-2 text-center mb-4 d-none d-md-block">
       <p class="text-center font-italic">{{user.descr}}</p>
     </div>
 {% endblock %}
