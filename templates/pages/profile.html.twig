@@ -5,7 +5,11 @@
 {% block body %}
 
     <div class="card bg-light p-2 text-center mb-4">
-      <h1>{{user.firstName}} {{user.lastName}}</h1>
+      {% if not is_granted('ROLE_COMPANY') %}
+        <h1>{{user.firstName}} {{user.lastName}}</h1>
+      {% else %}
+        <h1>{{user.firstName}}</h1>
+      {% endif %}
       {% if is_granted('ROLE_COMPANY') and (app.user.id == user.id) %}
         <h1><span class="small">Company name: </span>{{user.lastName}}</h1>
       {% endif %}

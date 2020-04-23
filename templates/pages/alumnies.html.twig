@@ -15,7 +15,12 @@
 							</div>							
 						</div>
 						<div class="w-50 p-1">
-							<h3 class="alumni">{{user.firstName}}<br>{{user.lastName}}</h3>
+							{% if not is_granted('ROLE_COMPANY') %}
+								<h3 class="alumni">{{user.firstName}}<br>{{user.lastName}}</h3>
+							{% else %}
+								<h3 class="alumni">{{user.firstName}}</h3>
+							{% endif %}
+							
 							<a href="/alumni/profile={{user.id}}" class="btn btn-success btn-sm stretched-link">See personal profile</a>
 						</div>
 					</div>
