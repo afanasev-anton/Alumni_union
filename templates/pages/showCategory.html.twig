@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{tag}}| PASF Alumni Association{% endblock %}
+
+{% block main %}
+    {% if posts|length > 0 %}
+        {% for post in posts %}
+
+            <div class="card {{tag}} mb-4 p-3">
+                <h2>
+                    <a href="{{ path('showPost', {slug: post.slug}) }}" class="link">
+                        {{ post.title }}
+                    </a>
+                </h2>
+                <p>{{ post.content[:80] ~ '...' }}</p>  
+                <div class="row m-0 text-muted">
+                    <p class="mr-3">Created by <i class="fa fa-user"></i> {{ post.author }}</p>
+                    {{ include('pages/_post_tags.html.twig') }}
+                    <span class="ml-auto"><i class="fa fa-calendar"></i> {{ post.createdAt | date('j. F Y H:m')}} </span>
+                </div>
+            </div>
+        {% endfor %}
+        {% else %}
+        There are no Posts
+    {% endif %}
+{% endblock %}
+{% block sidebar %}
+    {{ include('inc/sidebar.html.twig') }}
+{% endblock %}
