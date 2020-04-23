@@ -455,6 +455,24 @@ footer {
   height: 10em;
 }
 
+.footer {
+  height: 3em;
+  width: 100%;
+  background-color: white;
+}
+
 .twitter {
   color: rgb(135, 199, 221);
+}
+
+.trans {
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+.title-bg {
+  background-color: rgba(212,117,0,0.6);
+  border-radius: 5px;
+  padding: 0.2em;
 }
