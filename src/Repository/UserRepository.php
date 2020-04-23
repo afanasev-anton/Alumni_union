@@ -41,6 +41,12 @@ class UserRepository extends ServiceEntityRepository
         return $this->getEntityManager()->createQuery($sql)->getResult();
     }
 
+    public function findBySkill($value)
+    {
+        $sql = "SELECT u FROM App:User u WHERE u.skills LIKE '%$value%'";
+        return $this->getEntityManager()->createQuery($sql)->getResult();
+    }
+
     /*
     public function findOneBySomeField($value): ?User
     {
