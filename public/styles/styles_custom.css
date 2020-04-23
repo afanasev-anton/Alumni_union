@@ -454,14 +454,15 @@ font-weight: bold;
   background-color:green; left:0px;
 }
 
-footer {
+/*footer {
   height: 10em;
-}
+}*/
 
 .footer {
-  height: 3em;
+  height: 10em;
+  /*height: 3em;
   width: 100%;
-  background-color: white;
+  background-color: white;*/
 }
 
 .twitter {
